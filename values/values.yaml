@@ -1,0 +1,15 @@
+version: v0.0.1
+openapi:
+  version: 3.1.0
+  title: Freshchat SDK
+  contact:
+    email: "vian@idjo.cc"
+servers:
+  - url: https://{domain}.freshchat.com/api/v2
+    variables:
+      domain:
+        default: example
+tags:
+  - name: Conversations
+    description: |-
+      Freshchat facilitates interactions between an organization and its end-user. These interactions are recorded as conversations. Agents and users can initiate conversations and subsequently send messages to conversations. Agents and bots can handle conversations. Conversations can be auto-assigned or manually assigned to a group or agent.
