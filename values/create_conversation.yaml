@@ -47,8 +47,8 @@ schemas:
   CreateConversationRequests:
     type: object
     required: 
-      -messages
-      -channel_id
+      - messages
+      - channel_id
     properties:
       messages:
         type: array
@@ -71,15 +71,3 @@ schemas:
       assigned_org_group_id:
         type: string
         description: Organization-level identifier of the group to which the conversation is assigned for resolution.
-
-
-
-
-
-
-
-
-
-
-
-
