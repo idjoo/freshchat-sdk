@@ -1,7 +1,7 @@
 paths:
   /tickets/{id}/conversation:
     post:
-      operationId: create_conversation
+      operationId: list_conversation
       tags:
         - Tickets
       parameters:
@@ -15,27 +15,24 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CreateConversationRequests"
+              $ref: "#/components/schemas/ListConversationRequests"
       responses:
         '200':
           description: Successful operation
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/CreateConversations"
+                $ref: "#/components/schemas/listConversations"
 schemas:
-  CreateConversations:
+  ListConversation:
     type: object
     properties:
-      messages:
+      messages: 
         type: array
         description: Details of the messages that constitute the conversation. 
         items:
           type: string
           format: binary
-      channel_id:
-        type: string
-        description: Identifier of the topic under which the conversation is to be created.
       properties: 
         type: object
         description: Details of the conversation properties configured for the Freshchat account.
@@ -44,7 +41,7 @@ schemas:
         description: Details of the user who initiated the conversation.
         item:
           type: object
-  CreateConversationRequests:
+  ListConversationRequests:
     type: object
     required: 
       -messages
@@ -56,6 +53,11 @@ schemas:
         items:
           type: string
           format: binary
+      users: 
+        type: array
+        description: Details of the user who initiated the conversation.
+        item:
+          type: object 
       channel_id:
         type: string
         description: Identifier of the topic under which the conversation is to be created.
@@ -73,13 +75,7 @@ schemas:
         description: Organization-level identifier of the group to which the conversation is assigned for resolution.
 
 
-
-
-
-
-
-
-
-
+ 
+ 
 
 
