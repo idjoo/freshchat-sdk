@@ -47,8 +47,8 @@ schemas:
   CreateConversationRequests:
     type: object
     required: 
-      -messages
-      -channel_id
+      - messages
+      - channel_id
     properties:
       messages:
         type: array

@@ -39,7 +39,7 @@ schemas:
   UpdateConversationRequests: 
     type: object
     required:
-      -conversation_id
+      - conversation_id
     properties: 
       conversation_id: 
         type: string
