@@ -7,33 +7,29 @@ from attrs import field as _attrs_field
 from ..types import UNSET, File, FileJsonType, Unset
 
 if TYPE_CHECKING:
-    from ..models.conversations_properties import ConversationsProperties
-    from ..models.conversations_users_item import ConversationsUsersItem
+    from ..models.list_conversation_properties import ListConversationProperties
+    from ..models.list_conversation_users_item import ListConversationUsersItem
 
 
-T = TypeVar("T", bound="Conversations")
+T = TypeVar("T", bound="ListConversation")
 
 
 @_attrs_define
-class Conversations:
+class ListConversation:
     """
     Attributes:
-        channel_id (Union[Unset, str]): Identifier of the topic under which the conversation is to be created.
         messages (Union[Unset, list[File]]): Details of the messages that constitute the conversation.
-        properties (Union[Unset, ConversationsProperties]): Details of the conversation properties configured for the
+        properties (Union[Unset, ListConversationProperties]): Details of the conversation properties configured for the
             Freshchat account.
-        users (Union[Unset, list['ConversationsUsersItem']]): Details of the user who initiated the conversation.
+        users (Union[Unset, list['ListConversationUsersItem']]): Details of the user who initiated the conversation.
     """
 
-    channel_id: Union[Unset, str] = UNSET
     messages: Union[Unset, list[File]] = UNSET
-    properties: Union[Unset, "ConversationsProperties"] = UNSET
-    users: Union[Unset, list["ConversationsUsersItem"]] = UNSET
+    properties: Union[Unset, "ListConversationProperties"] = UNSET
+    users: Union[Unset, list["ListConversationUsersItem"]] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        channel_id = self.channel_id
-
         messages: Union[Unset, list[FileJsonType]] = UNSET
         if not isinstance(self.messages, Unset):
             messages = []
@@ -56,8 +52,6 @@ class Conversations:
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
-        if channel_id is not UNSET:
-            field_dict["channel_id"] = channel_id
         if messages is not UNSET:
             field_dict["messages"] = messages
         if properties is not UNSET:
@@ -69,12 +63,10 @@ class Conversations:
 
     @classmethod
     def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        from ..models.conversations_properties import ConversationsProperties
-        from ..models.conversations_users_item import ConversationsUsersItem
+        from ..models.list_conversation_properties import ListConversationProperties
+        from ..models.list_conversation_users_item import ListConversationUsersItem
 
         d = src_dict.copy()
-        channel_id = d.pop("channel_id", UNSET)
-
         messages = []
         _messages = d.pop("messages", UNSET)
         for messages_item_data in _messages or []:
@@ -83,28 +75,27 @@ class Conversations:
             messages.append(messages_item)
 
         _properties = d.pop("properties", UNSET)
-        properties: Union[Unset, ConversationsProperties]
+        properties: Union[Unset, ListConversationProperties]
         if isinstance(_properties, Unset):
             properties = UNSET
         else:
-            properties = ConversationsProperties.from_dict(_properties)
+            properties = ListConversationProperties.from_dict(_properties)
 
         users = []
         _users = d.pop("users", UNSET)
         for users_item_data in _users or []:
-            users_item = ConversationsUsersItem.from_dict(users_item_data)
+            users_item = ListConversationUsersItem.from_dict(users_item_data)
 
             users.append(users_item)
 
-        conversations = cls(
-            channel_id=channel_id,
+        list_conversation = cls(
             messages=messages,
             properties=properties,
             users=users,
         )
 
-        conversations.additional_properties = d
-        return conversations
+        list_conversation.additional_properties = d
+        return list_conversation
 
     @property
     def additional_keys(self) -> list[str]:

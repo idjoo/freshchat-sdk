@@ -27,55 +27,56 @@ schemas:
   ListConversation:
     type: object
     properties:
-      messages: 
+      messages:
         type: array
-        description: Details of the messages that constitute the conversation. 
+        description: Details of the messages that constitute the conversation.
         items:
           type: string
           format: binary
-      properties: 
+      properties:
         type: object
-        description: Details of the conversation properties configured for the Freshchat account.
-      users: 
+        description: Details of the conversation properties configured for the Freshchat
+          account.
+      users:
         type: array
         description: Details of the user who initiated the conversation.
-        item:
+        items:
           type: object
   ListConversationRequests:
     type: object
-    required: 
+    required:
       - messages
       - channel_id
     properties:
       messages:
         type: array
-        description: Details of the messages that constitute the conversation. 
+        description: Details of the messages that constitute the conversation.
         items:
           type: string
           format: binary
-      users: 
+      users:
         type: array
         description: Details of the user who initiated the conversation.
-        item:
-          type: object 
+        items:
+          type: object
       channel_id:
         type: string
-        description: Identifier of the topic under which the conversation is to be created.
+        description: Identifier of the topic under which the conversation is to be
+          created.
       assigned_agent_id:
         type: string
-        description: Identifier of the agent to whom the conversation is assigned for resolution.
+        description: Identifier of the agent to whom the conversation is assigned
+          for resolution.
       assigned_org_agent_id:
         type: string
-        description: Organization-level identifier of the agent to whom the conversation is assigned for resolution.
+        description: Organization-level identifier of the agent to whom the conversation
+          is assigned for resolution.
       assigned_group_id:
         type: string
-        description: Identifier of the group to which the conversation is assigned for resolution.
+        description: Identifier of the group to which the conversation is assigned
+          for resolution.
       assigned_org_group_id:
         type: string
-        description: Organization-level identifier of the group to which the conversation is assigned for resolution.
-
-
- 
- 
-
+        description: Organization-level identifier of the group to which the conversation
+          is assigned for resolution.
 

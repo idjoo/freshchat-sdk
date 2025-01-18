@@ -27,42 +27,51 @@ schemas:
   UpdateConversations:
     type: object
     properties:
-      conversation_id: 
+      conversation_id:
         type: string
-        description: Identifier of the conversation object, auto-generated when a conversation record is created in the Freshchat system.
-      status: 
+        description: Identifier of the conversation object, auto-generated when a
+          conversation record is created in the Freshchat system.
+      status:
         type: string
         description: Status of the conversation.
-      channel_id: 
+      channel_id:
         type: string
-        description: Identifier of the topic under which the conversation is created, auto-generated when a topic is created in the Freshchat system.
-  UpdateConversationRequests: 
+        description: Identifier of the topic under which the conversation is created,
+          auto-generated when a topic is created in the Freshchat system.
+  UpdateConversationRequests:
     type: object
     required:
       - conversation_id
-    properties: 
-      conversation_id: 
+    properties:
+      conversation_id:
         type: string
-        description: Identifier of the conversation object, auto-generated when a conversation record is created in the Freshchat system.
-      status: 
+        description: Identifier of the conversation object, auto-generated when a
+          conversation record is created in the Freshchat system.
+      status:
         type: string
         description: Status of the conversation.
-      channel_id: 
+      channel_id:
         type: string
-        description: Identifier of the topic under which the conversation is created, auto-generated when a topic is created in the Freshchat system.
+        description: Identifier of the topic under which the conversation is created,
+          auto-generated when a topic is created in the Freshchat system.
       assigned_org_agent_id:
         type: string
-        description: Organization-level identifier of the agent, to whom the conversation is assigned for resolution.
-      assigned_agent_id: 
+        description: Organization-level identifier of the agent, to whom the conversation
+          is assigned for resolution.
+      assigned_agent_id:
         type: string
-        description: Identifier of the agent assigned to the conversation, auto-generated when an agent’s information is configured in the Freshchat system.
-      assigned_org_group_id: 
+        description: Identifier of the agent assigned to the conversation, auto-generated
+          when an agent’s information is configured in the Freshchat system.
+      assigned_org_group_id:
         type: string
-        description: Organization-level identifier of the group, to which the conversation is assigned for resolution.
-      assigned_group_id: 
+        description: Organization-level identifier of the group, to which the conversation
+          is assigned for resolution.
+      assigned_group_id:
         type: string
-        description: Identifier of the group to which the conversation is assigned, auto-generated when a group is created in the Freshchat system.
+        description: Identifier of the group to which the conversation is assigned,
+          auto-generated when a group is created in the Freshchat system.
       properties:
         type: object
-        description: Details of the conversation properties configured for the Freshchat account.
+        description: Details of the conversation properties configured for the Freshchat
+          account.
 

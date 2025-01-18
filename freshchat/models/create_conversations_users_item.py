@@ -3,11 +3,11 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-T = TypeVar("T", bound="ConversationsUsersItem")
+T = TypeVar("T", bound="CreateConversationsUsersItem")
 
 
 @_attrs_define
-class ConversationsUsersItem:
+class CreateConversationsUsersItem:
     """ """
 
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
@@ -21,10 +21,10 @@ class ConversationsUsersItem:
     @classmethod
     def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         d = src_dict.copy()
-        conversations_users_item = cls()
+        create_conversations_users_item = cls()
 
-        conversations_users_item.additional_properties = d
-        return conversations_users_item
+        create_conversations_users_item.additional_properties = d
+        return create_conversations_users_item
 
     @property
     def additional_keys(self) -> list[str]:

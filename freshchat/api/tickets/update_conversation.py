@@ -5,15 +5,15 @@ import httpx
 
 from ... import errors
 from ...client import Client
-from ...models.conversations import Conversations
-from ...models.create_conversation_requests import CreateConversationRequests
+from ...models.update_conversation_requests import UpdateConversationRequests
+from ...models.update_conversations import UpdateConversations
 from ...types import Response
 
 
 def _get_kwargs(
     id: int,
     *,
-    body: CreateConversationRequests,
+    body: UpdateConversationRequests,
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
 
@@ -31,9 +31,9 @@ def _get_kwargs(
     return _kwargs
 
 
-def _parse_response(*, client: Client, response: httpx.Response) -> Optional[Conversations]:
+def _parse_response(*, client: Client, response: httpx.Response) -> Optional[UpdateConversations]:
     if response.status_code == 200:
-        response_200 = Conversations.from_dict(response.json())
+        response_200 = UpdateConversations.from_dict(response.json())
 
         return response_200
     if client.raise_on_unexpected_status:
@@ -42,7 +42,7 @@ def _parse_response(*, client: Client, response: httpx.Response) -> Optional[Con
         return None
 
 
-def _build_response(*, client: Client, response: httpx.Response) -> Response[Conversations]:
+def _build_response(*, client: Client, response: httpx.Response) -> Response[UpdateConversations]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -55,19 +55,19 @@ def sync_detailed(
     id: int,
     *,
     client: Client,
-    body: CreateConversationRequests,
-) -> Response[Conversations]:
+    body: UpdateConversationRequests,
+) -> Response[UpdateConversations]:
     """
     Args:
         id (int):
-        body (CreateConversationRequests):
+        body (UpdateConversationRequests):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Conversations]
+        Response[UpdateConversations]
     """
 
     kwargs = _get_kwargs(
@@ -86,19 +86,19 @@ def sync(
     id: int,
     *,
     client: Client,
-    body: CreateConversationRequests,
-) -> Optional[Conversations]:
+    body: UpdateConversationRequests,
+) -> Optional[UpdateConversations]:
     """
     Args:
         id (int):
-        body (CreateConversationRequests):
+        body (UpdateConversationRequests):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Conversations
+        UpdateConversations
     """
 
     return sync_detailed(
@@ -112,19 +112,19 @@ async def asyncio_detailed(
     id: int,
     *,
     client: Client,
-    body: CreateConversationRequests,
-) -> Response[Conversations]:
+    body: UpdateConversationRequests,
+) -> Response[UpdateConversations]:
     """
     Args:
         id (int):
-        body (CreateConversationRequests):
+        body (UpdateConversationRequests):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Conversations]
+        Response[UpdateConversations]
     """
 
     kwargs = _get_kwargs(
@@ -141,19 +141,19 @@ async def asyncio(
     id: int,
     *,
     client: Client,
-    body: CreateConversationRequests,
-) -> Optional[Conversations]:
+    body: UpdateConversationRequests,
+) -> Optional[UpdateConversations]:
     """
     Args:
         id (int):
-        body (CreateConversationRequests):
+        body (UpdateConversationRequests):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Conversations
+        UpdateConversations
     """
 
     return (
