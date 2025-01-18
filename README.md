@@ -1,21 +1,21 @@
-# freshdesk-sdk
-A client library for accessing Freshdesk SDK
+# freshchat-sdk
+A client library for accessing Freshchat SDK
 
 ## Installation
 
 ```
-pip install git+ssh://git@github.com/idjoo/freshdesk-sdk.git
-pip install git+http://github.com/idjoo/freshdesk-sdk.git
+pip install git+ssh://git@github.com/idjoo/freshchat-sdk.git
+pip install git+http://github.com/idjoo/freshchat-sdk.git
 ```
 
 ## Usage
 First, create a client:
 
 ```python
-from freshdesk import Client
+from freshchat import Client
 
 client = Client(
-    base_url="https://example.freshdesk.com",
+    base_url="https://example.freshchat.com/v2/",
     token="xxx",
 )
 ```
@@ -23,9 +23,9 @@ client = Client(
 Now call your endpoint and use your models:
 
 ```python
-from freshdesk.models import MyDataModel
-from freshdesk.api.my_tag import get_my_data_model
-from freshdesk.types import Response
+from freshchat.models import MyDataModel
+from freshchat.api.my_tag import get_my_data_model
+from freshchat.types import Response
 
 with client as client:
     my_data: MyDataModel = get_my_data_model.sync(client=client)
@@ -36,9 +36,9 @@ with client as client:
 Or do the same thing with an async version:
 
 ```python
-from freshdesk.models import MyDataModel
-from freshdesk.api.my_tag import get_my_data_model
-from freshdesk.types import Response
+from freshchat.models import MyDataModel
+from freshchat.api.my_tag import get_my_data_model
+from freshchat.types import Response
 
 async with client as client:
     my_data: MyDataModel = await get_my_data_model.asyncio(client=client)
@@ -72,14 +72,14 @@ Things to know:
 
 1. All path/query params, and bodies become method arguments.
 1. If your endpoint had any tags on it, the first tag will be used as a module name for the function (my_tag above)
-1. Any endpoint which did not have a tag will be in `freshdesk.api.default`
+1. Any endpoint which did not have a tag will be in `freshchat.api.default`
 
 ## Advanced customizations
 
 There are more settings on the generated `Client` class which let you control more runtime behavior, check out the docstring on that class for more info. You can also customize the underlying `httpx.Client` or `httpx.AsyncClient` (depending on your use-case):
 
 ```python
-from freshdesk import Client
+from freshchat import Client
 
 def log_request(request):
     print(f"Request event hook: {request.method} {request.url} - Waiting for response")
@@ -100,7 +100,7 @@ You can even set the httpx client directly, but beware that this will override a
 
 ```python
 import httpx
-from freshdesk import Client
+from freshchat import Client
 
 client = Client(
     base_url="https://api.example.com",

@@ -21,7 +21,7 @@ generate:
 		--overwrite
 
 	rsync -avh --progress --delete \
-		"$(TEMP_DIR)/freshdesk/" "$(ROOT_DIR)/freshdesk/"
+		"$(TEMP_DIR)/freshchat/" "$(ROOT_DIR)/freshchat/"
 
 	cp -rf \
 		"$(TEMP_DIR)/pyproject.toml" "$(TEMP_DIR)/README.md" "$(ROOT_DIR)/"

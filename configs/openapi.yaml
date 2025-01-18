@@ -20,10 +20,84 @@ tags:
   - name: Conversations
     description: Freshchat facilitates interactions between an organization and its end-user. These interactions are recorded as conversations. Agents and users can initiate conversations and subsequently send messages to conversations. Agents and bots can handle conversations. Conversations can be auto-assigned or manually assigned to a group or agent.
 paths:
-  {}
+  /tickets/{id}/conversation:
+    post:
+      operationId: create_conversation
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateConversationRequests'
+        description: ""
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conversations'
+          description: Successful operation
+      tags:
+      - Tickets
 components:
   schemas:
-    {}
+    Conversations:
+      properties:
+        channel_id:
+          description: Identifier of the topic under which the conversation is to be created.
+          type: string
+        messages:
+          description: Details of the messages that constitute the conversation.
+          items:
+            format: binary
+            type: string
+          type: array
+        properties:
+          description: Details of the conversation properties configured for the Freshchat
+            account.
+          type: object
+        users:
+          description: Details of the user who initiated the conversation.
+          items:
+            type: object
+          type: array
+      type: object
+    CreateConversationRequests:
+      properties:
+        assigned_agent_id:
+          description: Identifier of the agent to whom the conversation is assigned for
+            resolution.
+          type: string
+        assigned_group_id:
+          description: Identifier of the group to which the conversation is assigned for
+            resolution.
+          type: string
+        assigned_org_agent_id:
+          description: Organization-level identifier of the agent to whom the conversation
+            is assigned for resolution.
+          type: string
+        assigned_org_group_id:
+          description: Organization-level identifier of the group to which the conversation
+            is assigned for resolution.
+          type: string
+        channel_id:
+          description: Identifier of the topic under which the conversation is to be created.
+          type: string
+        messages:
+          description: Details of the messages that constitute the conversation.
+          items:
+            format: binary
+            type: string
+          type: array
+      required:
+      - messages
+      - channel_id
+      type: object
 securitySchemes:
   basicAuth:
     type: http

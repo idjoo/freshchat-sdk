@@ -58,7 +58,7 @@ wheels = [
 ]
 
 [[package]]
-name = "freshdesk-sdk"
+name = "freshchat-sdk"
 version = "2"
 source = { editable = "." }
 dependencies = [
