@@ -1,0 +1,68 @@
+paths:
+  /conversations/{conversation_id}/messages:
+    post:
+      operationId: reply_conversation
+      tags:
+        - Conversations
+      parameters:
+        - in: path
+          name: conversation_id
+          schema:
+            type: string
+          required: true
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReplyConversationRequest"
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReplyConversationResponse"
+schemas:
+  ReplyConversationRequest:
+    type: object
+    properties:
+      message_parts:
+        type: array
+        items:
+          type: object
+          properties:
+            text:
+              type: object
+              properties:
+                content:
+                  type: string
+      message_type:
+        type: string
+      actor_type:
+        type: string
+      user_id:
+        type: string
+      actor_id:
+        type: string
+  ReplyConversationResponse:
+    type: object
+    properties:
+      message_parts:
+        type: array
+        items:
+          type: object
+          properties:
+            text:
+              type: object
+              properties:
+                content:
+                  type: string
+      message_type:
+        type: string
+      actor_type:
+        type: string
+      user_id:
+        type: string
+      actor_id:
+        type: string

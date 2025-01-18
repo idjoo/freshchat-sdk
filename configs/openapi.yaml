@@ -20,6 +20,30 @@ tags:
   - name: Conversations
     description: Freshchat facilitates interactions between an organization and its end-user. These interactions are recorded as conversations. Agents and users can initiate conversations and subsequently send messages to conversations. Agents and bots can handle conversations. Conversations can be auto-assigned or manually assigned to a group or agent.
 paths:
+  /conversations/{conversation_id}/messages:
+    post:
+      operationId: reply_conversation
+      parameters:
+      - in: path
+        name: conversation_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReplyConversationRequest'
+        description: ""
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReplyConversationResponse'
+          description: Successful operation
+      tags:
+      - Conversations
   /tickets/{id}/conversation:
     post:
       operationId: update_conversation
@@ -151,6 +175,48 @@ components:
       required:
       - messages
       - channel_id
+      type: object
+    ReplyConversationRequest:
+      properties:
+        actor_id:
+          type: string
+        actor_type:
+          type: string
+        message_parts:
+          items:
+            properties:
+              text:
+                properties:
+                  content:
+                    type: string
+                type: object
+            type: object
+          type: array
+        message_type:
+          type: string
+        user_id:
+          type: string
+      type: object
+    ReplyConversationResponse:
+      properties:
+        actor_id:
+          type: string
+        actor_type:
+          type: string
+        message_parts:
+          items:
+            properties:
+              text:
+                properties:
+                  content:
+                    type: string
+                type: object
+            type: object
+          type: array
+        message_type:
+          type: string
+        user_id:
+          type: string
       type: object
     UpdateConversationRequests:
       properties:
