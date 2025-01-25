@@ -3,7 +3,6 @@ HELM_VALUES_DIR = values
 ROOT_DIR := $(shell git rev-parse --show-toplevel)
 TEMP_DIR := $(shell mktemp -d)
 HELM_VALUES := $(wildcard $(HELM_VALUES_DIR)/*.yaml)
-ACCESS_TOKEN := $(shell gcloud auth print-access-token)
 HELM_ARGS := $(foreach value,$(HELM_VALUES),-f $(value))
 
 .PHONY: template
