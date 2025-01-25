@@ -1,0 +1,70 @@
+paths:
+  /conversation/{id}:
+    post:
+      operationId: assign_conversation
+      tags:
+        - Conversations
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+            format: uuid
+          required: true
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AssignConversationRequest"
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AssignConversationResponse"
+
+schemas:
+  AssignConversationRequest:
+    type: object
+    required:
+      - conversation_id
+    properties:
+      status:
+        type: string
+        description: Status of the conversation.
+      assigned_group_id:
+        type: string
+        description: Identifier of the group to which the conversation is assigned,
+          auto-generated when a group is created in the Freshchat system.
+
+  AssignConversationResponse:
+    type: object
+    properties:
+      conversation_id:
+        type: string
+      conversation_internal_id:
+        type: integer
+      app_id:
+        type: string
+      status:
+        type: string
+      channel_id:
+        type: string
+      assigned_group_id:
+        type: string
+      skill_id:
+        type: integer
+      url:
+        type: string
+      org_contact_id:
+        type: string
+      created_time:
+        type: string
+        format: date-time
+      updated_time:
+        type: string
+        format: date-time
+      user_id:
+        type: string

@@ -20,6 +20,31 @@ tags:
   - name: Conversations
     description: Freshchat facilitates interactions between an organization and its end-user. These interactions are recorded as conversations. Agents and users can initiate conversations and subsequently send messages to conversations. Agents and bots can handle conversations. Conversations can be auto-assigned or manually assigned to a group or agent.
 paths:
+  /conversation/{id}:
+    post:
+      operationId: assign_conversation
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssignConversationRequest'
+        description: ""
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssignConversationResponse'
+          description: Successful operation
+      tags:
+      - Conversations
   /conversations/{conversation_id}/messages:
     post:
       operationId: reply_conversation
@@ -70,6 +95,47 @@ paths:
       - Tickets
 components:
   schemas:
+    AssignConversationRequest:
+      properties:
+        assigned_group_id:
+          description: Identifier of the group to which the conversation is assigned,
+            auto-generated when a group is created in the Freshchat system.
+          type: string
+        status:
+          description: Status of the conversation.
+          type: string
+      required:
+      - conversation_id
+      type: object
+    AssignConversationResponse:
+      properties:
+        app_id:
+          type: string
+        assigned_group_id:
+          type: string
+        channel_id:
+          type: string
+        conversation_id:
+          type: string
+        conversation_internal_id:
+          type: integer
+        created_time:
+          format: date-time
+          type: string
+        org_contact_id:
+          type: string
+        skill_id:
+          type: integer
+        status:
+          type: string
+        updated_time:
+          format: date-time
+          type: string
+        url:
+          type: string
+        user_id:
+          type: string
+      type: object
     CreateConversationRequests:
       properties:
         assigned_agent_id:

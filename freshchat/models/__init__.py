@@ -1,5 +1,7 @@
 """Contains all the data models used in inputs/outputs"""
 
+from .assign_conversation_request import AssignConversationRequest
+from .assign_conversation_response import AssignConversationResponse
 from .create_conversation_requests import CreateConversationRequests
 from .create_conversations import CreateConversations
 from .create_conversations_properties import CreateConversationsProperties
@@ -20,6 +22,8 @@ from .update_conversation_requests_properties import UpdateConversationRequestsP
 from .update_conversations import UpdateConversations
 
 __all__ = (
+    "AssignConversationRequest",
+    "AssignConversationResponse",
     "CreateConversationRequests",
     "CreateConversations",
     "CreateConversationsProperties",
