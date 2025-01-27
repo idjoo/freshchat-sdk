@@ -3,28 +3,31 @@ from typing import Any, TypeVar, Union
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
+from ..models.update_conversation_request_status import UpdateConversationRequestStatus
 from ..types import UNSET, Unset
 
-T = TypeVar("T", bound="AssignConversationRequest")
+T = TypeVar("T", bound="UpdateConversationRequest")
 
 
 @_attrs_define
-class AssignConversationRequest:
+class UpdateConversationRequest:
     """
     Attributes:
         assigned_group_id (Union[Unset, str]): Identifier of the group to which the conversation is assigned, auto-
             generated when a group is created in the Freshchat system.
-        status (Union[Unset, str]): Status of the conversation.
+        status (Union[Unset, UpdateConversationRequestStatus]): Status of the conversation.
     """
 
     assigned_group_id: Union[Unset, str] = UNSET
-    status: Union[Unset, str] = UNSET
+    status: Union[Unset, UpdateConversationRequestStatus] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         assigned_group_id = self.assigned_group_id
 
-        status = self.status
+        status: Union[Unset, str] = UNSET
+        if not isinstance(self.status, Unset):
+            status = self.status.value
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -41,15 +44,20 @@ class AssignConversationRequest:
         d = src_dict.copy()
         assigned_group_id = d.pop("assigned_group_id", UNSET)
 
-        status = d.pop("status", UNSET)
+        _status = d.pop("status", UNSET)
+        status: Union[Unset, UpdateConversationRequestStatus]
+        if isinstance(_status, Unset):
+            status = UNSET
+        else:
+            status = UpdateConversationRequestStatus(_status)
 
-        assign_conversation_request = cls(
+        update_conversation_request = cls(
             assigned_group_id=assigned_group_id,
             status=status,
         )
 
-        assign_conversation_request.additional_properties = d
-        return assign_conversation_request
+        update_conversation_request.additional_properties = d
+        return update_conversation_request
 
     @property
     def additional_keys(self) -> list[str]:

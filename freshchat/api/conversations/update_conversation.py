@@ -6,15 +6,15 @@ import httpx
 
 from ... import errors
 from ...client import Client
-from ...models.assign_conversation_request import AssignConversationRequest
-from ...models.assign_conversation_response import AssignConversationResponse
+from ...models.update_conversation_request import UpdateConversationRequest
+from ...models.update_conversation_response import UpdateConversationResponse
 from ...types import Response
 
 
 def _get_kwargs(
     id: UUID,
     *,
-    body: AssignConversationRequest,
+    body: UpdateConversationRequest,
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
 
@@ -32,9 +32,9 @@ def _get_kwargs(
     return _kwargs
 
 
-def _parse_response(*, client: Client, response: httpx.Response) -> Optional[AssignConversationResponse]:
+def _parse_response(*, client: Client, response: httpx.Response) -> Optional[UpdateConversationResponse]:
     if response.status_code == 200:
-        response_200 = AssignConversationResponse.from_dict(response.json())
+        response_200 = UpdateConversationResponse.from_dict(response.json())
 
         return response_200
     if client.raise_on_unexpected_status:
@@ -43,7 +43,7 @@ def _parse_response(*, client: Client, response: httpx.Response) -> Optional[Ass
         return None
 
 
-def _build_response(*, client: Client, response: httpx.Response) -> Response[AssignConversationResponse]:
+def _build_response(*, client: Client, response: httpx.Response) -> Response[UpdateConversationResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -56,19 +56,19 @@ def sync_detailed(
     id: UUID,
     *,
     client: Client,
-    body: AssignConversationRequest,
-) -> Response[AssignConversationResponse]:
+    body: UpdateConversationRequest,
+) -> Response[UpdateConversationResponse]:
     """
     Args:
         id (UUID):
-        body (AssignConversationRequest):
+        body (UpdateConversationRequest):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[AssignConversationResponse]
+        Response[UpdateConversationResponse]
     """
 
     kwargs = _get_kwargs(
@@ -87,19 +87,19 @@ def sync(
     id: UUID,
     *,
     client: Client,
-    body: AssignConversationRequest,
-) -> Optional[AssignConversationResponse]:
+    body: UpdateConversationRequest,
+) -> Optional[UpdateConversationResponse]:
     """
     Args:
         id (UUID):
-        body (AssignConversationRequest):
+        body (UpdateConversationRequest):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        AssignConversationResponse
+        UpdateConversationResponse
     """
 
     return sync_detailed(
@@ -113,19 +113,19 @@ async def asyncio_detailed(
     id: UUID,
     *,
     client: Client,
-    body: AssignConversationRequest,
-) -> Response[AssignConversationResponse]:
+    body: UpdateConversationRequest,
+) -> Response[UpdateConversationResponse]:
     """
     Args:
         id (UUID):
-        body (AssignConversationRequest):
+        body (UpdateConversationRequest):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[AssignConversationResponse]
+        Response[UpdateConversationResponse]
     """
 
     kwargs = _get_kwargs(
@@ -142,19 +142,19 @@ async def asyncio(
     id: UUID,
     *,
     client: Client,
-    body: AssignConversationRequest,
-) -> Optional[AssignConversationResponse]:
+    body: UpdateConversationRequest,
+) -> Optional[UpdateConversationResponse]:
     """
     Args:
         id (UUID):
-        body (AssignConversationRequest):
+        body (UpdateConversationRequest):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        AssignConversationResponse
+        UpdateConversationResponse
     """
 
     return (

@@ -7,11 +7,11 @@ from dateutil.parser import isoparse
 
 from ..types import UNSET, Unset
 
-T = TypeVar("T", bound="AssignConversationResponse")
+T = TypeVar("T", bound="UpdateConversationResponse")
 
 
 @_attrs_define
-class AssignConversationResponse:
+class UpdateConversationResponse:
     """
     Attributes:
         app_id (Union[Unset, str]):
@@ -138,7 +138,7 @@ class AssignConversationResponse:
 
         user_id = d.pop("user_id", UNSET)
 
-        assign_conversation_response = cls(
+        update_conversation_response = cls(
             app_id=app_id,
             assigned_group_id=assigned_group_id,
             channel_id=channel_id,
@@ -153,8 +153,8 @@ class AssignConversationResponse:
             user_id=user_id,
         )
 
-        assign_conversation_response.additional_properties = d
-        return assign_conversation_response
+        update_conversation_response.additional_properties = d
+        return update_conversation_response
 
     @property
     def additional_keys(self) -> list[str]:

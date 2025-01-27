@@ -22,7 +22,7 @@ tags:
 paths:
   /conversation/{id}:
     post:
-      operationId: assign_conversation
+      operationId: update_conversation
       parameters:
       - in: path
         name: id
@@ -34,14 +34,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AssignConversationRequest'
+              $ref: '#/components/schemas/UpdateConversationRequest'
         description: ""
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AssignConversationResponse'
+                $ref: '#/components/schemas/UpdateConversationResponse'
           description: Successful operation
       tags:
       - Conversations
@@ -69,179 +69,8 @@ paths:
           description: Successful operation
       tags:
       - Conversations
-  /tickets/{id}/conversation:
-    post:
-      operationId: update_conversation
-      parameters:
-      - in: path
-        name: id
-        required: true
-        schema:
-          type: integer
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UpdateConversationRequests'
-        description: ""
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UpdateConversations'
-          description: Successful operation
-      tags:
-      - Tickets
 components:
   schemas:
-    AssignConversationRequest:
-      properties:
-        assigned_group_id:
-          description: Identifier of the group to which the conversation is assigned,
-            auto-generated when a group is created in the Freshchat system.
-          type: string
-        status:
-          description: Status of the conversation.
-          type: string
-      required:
-      - conversation_id
-      type: object
-    AssignConversationResponse:
-      properties:
-        app_id:
-          type: string
-        assigned_group_id:
-          type: string
-        channel_id:
-          type: string
-        conversation_id:
-          type: string
-        conversation_internal_id:
-          type: integer
-        created_time:
-          format: date-time
-          type: string
-        org_contact_id:
-          type: string
-        skill_id:
-          type: integer
-        status:
-          type: string
-        updated_time:
-          format: date-time
-          type: string
-        url:
-          type: string
-        user_id:
-          type: string
-      type: object
-    CreateConversationRequests:
-      properties:
-        assigned_agent_id:
-          description: Identifier of the agent to whom the conversation is assigned for
-            resolution.
-          type: string
-        assigned_group_id:
-          description: Identifier of the group to which the conversation is assigned for
-            resolution.
-          type: string
-        assigned_org_agent_id:
-          description: Organization-level identifier of the agent to whom the conversation
-            is assigned for resolution.
-          type: string
-        assigned_org_group_id:
-          description: Organization-level identifier of the group to which the conversation
-            is assigned for resolution.
-          type: string
-        channel_id:
-          description: Identifier of the topic under which the conversation is to be created.
-          type: string
-        messages:
-          description: Details of the messages that constitute the conversation.
-          items:
-            format: binary
-            type: string
-          type: array
-      required:
-      - messages
-      - channel_id
-      type: object
-    CreateConversations:
-      properties:
-        channel_id:
-          description: Identifier of the topic under which the conversation is to be created.
-          type: string
-        messages:
-          description: Details of the messages that constitute the conversation.
-          items:
-            format: binary
-            type: string
-          type: array
-        properties:
-          description: Details of the conversation properties configured for the Freshchat
-            account.
-          type: object
-        users:
-          description: Details of the user who initiated the conversation.
-          items:
-            type: object
-          type: array
-      type: object
-    ListConversation:
-      properties:
-        messages:
-          description: Details of the messages that constitute the conversation.
-          items:
-            format: binary
-            type: string
-          type: array
-        properties:
-          description: Details of the conversation properties configured for the Freshchat
-            account.
-          type: object
-        users:
-          description: Details of the user who initiated the conversation.
-          items:
-            type: object
-          type: array
-      type: object
-    ListConversationRequests:
-      properties:
-        assigned_agent_id:
-          description: Identifier of the agent to whom the conversation is assigned for
-            resolution.
-          type: string
-        assigned_group_id:
-          description: Identifier of the group to which the conversation is assigned for
-            resolution.
-          type: string
-        assigned_org_agent_id:
-          description: Organization-level identifier of the agent to whom the conversation
-            is assigned for resolution.
-          type: string
-        assigned_org_group_id:
-          description: Organization-level identifier of the group to which the conversation
-            is assigned for resolution.
-          type: string
-        channel_id:
-          description: Identifier of the topic under which the conversation is to be created.
-          type: string
-        messages:
-          description: Details of the messages that constitute the conversation.
-          items:
-            format: binary
-            type: string
-          type: array
-        users:
-          description: Details of the user who initiated the conversation.
-          items:
-            type: object
-          type: array
-      required:
-      - messages
-      - channel_id
-      type: object
     ReplyConversationRequest:
       properties:
         actor_id:
@@ -284,54 +113,48 @@ components:
         user_id:
           type: string
       type: object
-    UpdateConversationRequests:
+    UpdateConversationRequest:
       properties:
-        assigned_agent_id:
-          description: Identifier of the agent assigned to the conversation, auto-generated
-            when an agent’s information is configured in the Freshchat system.
-          type: string
         assigned_group_id:
           description: Identifier of the group to which the conversation is assigned,
             auto-generated when a group is created in the Freshchat system.
           type: string
-        assigned_org_agent_id:
-          description: Organization-level identifier of the agent, to whom the conversation
-            is assigned for resolution.
-          type: string
-        assigned_org_group_id:
-          description: Organization-level identifier of the group, to which the conversation
-            is assigned for resolution.
-          type: string
-        channel_id:
-          description: Identifier of the topic under which the conversation is created,
-            auto-generated when a topic is created in the Freshchat system.
-          type: string
-        conversation_id:
-          description: Identifier of the conversation object, auto-generated when a conversation
-            record is created in the Freshchat system.
-          type: string
-        properties:
-          description: Details of the conversation properties configured for the Freshchat
-            account.
-          type: object
         status:
           description: Status of the conversation.
+          enum:
+          - new
+          - assigned
+          - resolved
+          - reopened
           type: string
-      required:
-      - conversation_id
       type: object
-    UpdateConversations:
+    UpdateConversationResponse:
       properties:
+        app_id:
+          type: string
+        assigned_group_id:
+          type: string
         channel_id:
-          description: Identifier of the topic under which the conversation is created,
-            auto-generated when a topic is created in the Freshchat system.
           type: string
         conversation_id:
-          description: Identifier of the conversation object, auto-generated when a conversation
-            record is created in the Freshchat system.
           type: string
+        conversation_internal_id:
+          type: integer
+        created_time:
+          format: date-time
+          type: string
+        org_contact_id:
+          type: string
+        skill_id:
+          type: integer
         status:
-          description: Status of the conversation.
+          type: string
+        updated_time:
+          format: date-time
+          type: string
+        url:
+          type: string
+        user_id:
           type: string
       type: object
 securitySchemes:
