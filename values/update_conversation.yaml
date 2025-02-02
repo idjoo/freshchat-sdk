@@ -1,6 +1,6 @@
 paths:
-  /conversation/{id}:
-    post:
+  /conversations/{id}:
+    put:
       operationId: update_conversation
       tags:
         - Conversations

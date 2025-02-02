@@ -20,31 +20,6 @@ tags:
   - name: Conversations
     description: Freshchat facilitates interactions between an organization and its end-user. These interactions are recorded as conversations. Agents and users can initiate conversations and subsequently send messages to conversations. Agents and bots can handle conversations. Conversations can be auto-assigned or manually assigned to a group or agent.
 paths:
-  /conversation/{id}:
-    post:
-      operationId: update_conversation
-      parameters:
-      - in: path
-        name: id
-        required: true
-        schema:
-          format: uuid
-          type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UpdateConversationRequest'
-        description: ""
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UpdateConversationResponse'
-          description: Successful operation
-      tags:
-      - Conversations
   /conversations/{conversation_id}/messages:
     post:
       operationId: reply_conversation
@@ -66,6 +41,31 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ReplyConversationResponse'
+          description: Successful operation
+      tags:
+      - Conversations
+  /conversations/{id}:
+    put:
+      operationId: update_conversation
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateConversationRequest'
+        description: ""
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateConversationResponse'
           description: Successful operation
       tags:
       - Conversations

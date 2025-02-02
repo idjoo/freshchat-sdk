@@ -19,8 +19,8 @@ def _get_kwargs(
     headers: dict[str, Any] = {}
 
     _kwargs: dict[str, Any] = {
-        "method": "post",
-        "url": f"/conversation/{id}",
+        "method": "put",
+        "url": f"/conversations/{id}",
     }
 
     _body = body.to_dict()
