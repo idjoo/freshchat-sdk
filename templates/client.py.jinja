@@ -96,7 +96,6 @@ class Client:
         if self._client is None:
             if self.token:
                 self._headers[self.auth_header_name] = f"{self.prefix} {self.token}"
-            self._headers[self._auth_header_name] = f"{self._prefix} {self._token}"
             self._client = httpx.Client(
                 base_url=self._base_url,
                 cookies=self._cookies,
