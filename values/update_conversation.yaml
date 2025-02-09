@@ -41,6 +41,12 @@ schemas:
         type: string
         description: Identifier of the group to which the conversation is assigned,
           auto-generated when a group is created in the Freshchat system.
+      properties:
+        type: object
+        description: Details of the conversation properties configured for the Freshchat
+          account. The attribute contains the names of the conversation properties
+          configured and the corresponding values populated, as a valid JSON object
+          of key - value pairs.
 
   UpdateConversationResponse:
     type: object
