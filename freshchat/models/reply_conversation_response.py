@@ -7,6 +7,7 @@ from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
     from ..models.reply_conversation_response_message_parts_item import ReplyConversationResponseMessagePartsItem
+    from ..models.reply_conversation_response_reply_parts_item import ReplyConversationResponseReplyPartsItem
 
 
 T = TypeVar("T", bound="ReplyConversationResponse")
@@ -20,6 +21,7 @@ class ReplyConversationResponse:
         actor_type (Union[Unset, str]):
         message_parts (Union[Unset, list['ReplyConversationResponseMessagePartsItem']]):
         message_type (Union[Unset, str]):
+        reply_parts (Union[Unset, list['ReplyConversationResponseReplyPartsItem']]):
         user_id (Union[Unset, str]):
     """
 
@@ -27,6 +29,7 @@ class ReplyConversationResponse:
     actor_type: Union[Unset, str] = UNSET
     message_parts: Union[Unset, list["ReplyConversationResponseMessagePartsItem"]] = UNSET
     message_type: Union[Unset, str] = UNSET
+    reply_parts: Union[Unset, list["ReplyConversationResponseReplyPartsItem"]] = UNSET
     user_id: Union[Unset, str] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -44,6 +47,13 @@ class ReplyConversationResponse:
 
         message_type = self.message_type
 
+        reply_parts: Union[Unset, list[dict[str, Any]]] = UNSET
+        if not isinstance(self.reply_parts, Unset):
+            reply_parts = []
+            for reply_parts_item_data in self.reply_parts:
+                reply_parts_item = reply_parts_item_data.to_dict()
+                reply_parts.append(reply_parts_item)
+
         user_id = self.user_id
 
         field_dict: dict[str, Any] = {}
@@ -57,6 +67,8 @@ class ReplyConversationResponse:
             field_dict["message_parts"] = message_parts
         if message_type is not UNSET:
             field_dict["message_type"] = message_type
+        if reply_parts is not UNSET:
+            field_dict["reply_parts"] = reply_parts
         if user_id is not UNSET:
             field_dict["user_id"] = user_id
 
@@ -65,6 +77,7 @@ class ReplyConversationResponse:
     @classmethod
     def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         from ..models.reply_conversation_response_message_parts_item import ReplyConversationResponseMessagePartsItem
+        from ..models.reply_conversation_response_reply_parts_item import ReplyConversationResponseReplyPartsItem
 
         d = src_dict.copy()
         actor_id = d.pop("actor_id", UNSET)
@@ -80,6 +93,13 @@ class ReplyConversationResponse:
 
         message_type = d.pop("message_type", UNSET)
 
+        reply_parts = []
+        _reply_parts = d.pop("reply_parts", UNSET)
+        for reply_parts_item_data in _reply_parts or []:
+            reply_parts_item = ReplyConversationResponseReplyPartsItem.from_dict(reply_parts_item_data)
+
+            reply_parts.append(reply_parts_item)
+
         user_id = d.pop("user_id", UNSET)
 
         reply_conversation_response = cls(
@@ -87,6 +107,7 @@ class ReplyConversationResponse:
             actor_type=actor_type,
             message_parts=message_parts,
             message_type=message_type,
+            reply_parts=reply_parts,
             user_id=user_id,
         )
 

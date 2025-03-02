@@ -1,45 +1,30 @@
-from typing import Any, TypeVar, Union
+from typing import Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..types import UNSET, Unset
-
-T = TypeVar("T", bound="ReplyConversationResponseMessagePartsItemText")
+T = TypeVar("T", bound="ReplyConversationResponseReplyPartsItem")
 
 
 @_attrs_define
-class ReplyConversationResponseMessagePartsItemText:
-    """
-    Attributes:
-        content (Union[Unset, str]):
-    """
+class ReplyConversationResponseReplyPartsItem:
+    """ """
 
-    content: Union[Unset, str] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        content = self.content
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
-        if content is not UNSET:
-            field_dict["content"] = content
 
         return field_dict
 
     @classmethod
     def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         d = src_dict.copy()
-        content = d.pop("content", UNSET)
+        reply_conversation_response_reply_parts_item = cls()
 
-        reply_conversation_response_message_parts_item_text = cls(
-            content=content,
-        )
-
-        reply_conversation_response_message_parts_item_text.additional_properties = d
-        return reply_conversation_response_message_parts_item_text
+        reply_conversation_response_reply_parts_item.additional_properties = d
+        return reply_conversation_response_reply_parts_item
 
     @property
     def additional_keys(self) -> list[str]:

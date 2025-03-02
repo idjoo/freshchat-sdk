@@ -31,12 +31,10 @@ schemas:
         type: array
         items:
           type: object
-          properties:
-            text:
-              type: object
-              properties:
-                content:
-                  type: string
+      reply_parts:
+        type: array
+        items:
+          type: object
       message_type:
         type: string
       actor_type:
@@ -52,12 +50,10 @@ schemas:
         type: array
         items:
           type: object
-          properties:
-            text:
-              type: object
-              properties:
-                content:
-                  type: string
+      reply_parts:
+        type: array
+        items:
+          type: object
       message_type:
         type: string
       actor_type:

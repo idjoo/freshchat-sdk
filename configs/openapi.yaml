@@ -79,16 +79,14 @@ components:
           type: string
         message_parts:
           items:
-            properties:
-              text:
-                properties:
-                  content:
-                    type: string
-                type: object
             type: object
           type: array
         message_type:
           type: string
+        reply_parts:
+          items:
+            type: object
+          type: array
         user_id:
           type: string
       type: object
@@ -100,16 +98,14 @@ components:
           type: string
         message_parts:
           items:
-            properties:
-              text:
-                properties:
-                  content:
-                    type: string
-                type: object
             type: object
           type: array
         message_type:
           type: string
+        reply_parts:
+          items:
+            type: object
+          type: array
         user_id:
           type: string
       type: object
