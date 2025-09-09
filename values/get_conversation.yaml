@@ -1,0 +1,171 @@
+paths:
+  /conversations/{id}:
+    get:
+      operationId: get_conversation
+      summary: "Retrieves existing conversation"
+      description: "Get conversation by Id"
+      produces:
+        - "application/json"
+      tags:
+        - Conversations
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        200:
+          description: "Success Request"
+          schema:
+            $ref: "#/definitions/conversation"
+          headers:
+            X-RateLimit-Remaining:
+              type: "integer"
+              format: "int32"
+              description: "Number of operations left in the current window"
+            X-RateLimit-Reset:
+              type: "integer"
+              format: "int32"
+              description: "Time when rate limit window will be reset as a Unix timestamp."
+            X-RateLimit-Limit:
+              type: "integer"
+              format: "int32"
+              description: "Maximum number of operations allowed in the current window."
+        400:
+          description: "Bad Request"
+          schema:
+            $ref: "#/definitions/error"
+          headers:
+            X-RateLimit-Remaining:
+              type: "integer"
+              format: "int32"
+              description: "Number of operations left in the current window"
+            X-RateLimit-Reset:
+              type: "integer"
+              format: "int32"
+              description: "Time when rate limit window will be reset as a Unix timestamp."
+            X-RateLimit-Limit:
+              type: "integer"
+              format: "int32"
+              description: "Maximum number of operations allowed in the current window."
+        401:
+          description: "Unauthenticated Request"
+          schema:
+            $ref: "#/definitions/error"
+          headers:
+            X-RateLimit-Remaining:
+              type: "integer"
+              format: "int32"
+              description: "Number of operations left in the current window"
+            X-RateLimit-Reset:
+              type: "integer"
+              format: "int32"
+              description: "Time when rate limit window will be reset as a Unix timestamp."
+            X-RateLimit-Limit:
+              type: "integer"
+              format: "int32"
+              description: "Maximum number of operations allowed in the current window."
+        403:
+          description: "Forbidden"
+          schema:
+            $ref: "#/definitions/error"
+          headers:
+            X-RateLimit-Remaining:
+              type: "integer"
+              format: "int32"
+              description: "Number of operations left in the current window"
+            X-RateLimit-Reset:
+              type: "integer"
+              format: "int32"
+              description: "Time when rate limit window will be reset as a Unix timestamp."
+            X-RateLimit-Limit:
+              type: "integer"
+              format: "int32"
+              description: "Maximum number of operations allowed in the current window."
+        404:
+          description: "Not Found"
+          schema:
+            $ref: "#/definitions/error"
+          headers:
+            X-RateLimit-Remaining:
+              type: "integer"
+              format: "int32"
+              description: "Number of operations left in the current window"
+            X-RateLimit-Reset:
+              type: "integer"
+              format: "int32"
+              description: "Time when rate limit window will be reset as a Unix timestamp."
+            X-RateLimit-Limit:
+              type: "integer"
+              format: "int32"
+              description: "Maximum number of operations allowed in the current window."
+        409:
+          description: "Conflict"
+          schema:
+            $ref: "#/definitions/error"
+          headers:
+            X-RateLimit-Remaining:
+              type: "integer"
+              format: "int32"
+              description: "Number of operations left in the current window"
+            X-RateLimit-Reset:
+              type: "integer"
+              format: "int32"
+              description: "Time when rate limit window will be reset as a Unix timestamp."
+            X-RateLimit-Limit:
+              type: "integer"
+              format: "int32"
+              description: "Maximum number of operations allowed in the current window."
+        429:
+          description: "Too Many Requests"
+          schema:
+            $ref: "#/definitions/error"
+          headers:
+            X-RateLimit-Remaining:
+              type: "integer"
+              format: "int32"
+              description: "Number of operations left in the current window"
+            X-RateLimit-Reset:
+              type: "integer"
+              format: "int32"
+              description: "Time when rate limit window will be reset as a Unix timestamp."
+            X-RateLimit-Limit:
+              type: "integer"
+              format: "int32"
+              description: "Maximum number of operations allowed in the current window."
+        500:
+          description: "Internal Server Error"
+          schema:
+            $ref: "#/definitions/error"
+          headers:
+            X-RateLimit-Remaining:
+              type: "integer"
+              format: "int32"
+              description: "Number of operations left in the current window"
+            X-RateLimit-Reset:
+              type: "integer"
+              format: "int32"
+              description: "Time when rate limit window will be reset as a Unix timestamp."
+            X-RateLimit-Limit:
+              type: "integer"
+              format: "int32"
+              description: "Maximum number of operations allowed in the current window."
+        503:
+          description: "Service Unavailable"
+          schema:
+            $ref: "#/definitions/error"
+          headers:
+            X-RateLimit-Remaining:
+              type: "integer"
+              format: "int32"
+              description: "Number of operations left in the current window"
+            X-RateLimit-Reset:
+              type: "integer"
+              format: "int32"
+              description: "Time when rate limit window will be reset as a Unix timestamp."
+            X-RateLimit-Limit:
+              type: "integer"
+              format: "int32"
+              description: "Maximum number of operations allowed in the current window."
