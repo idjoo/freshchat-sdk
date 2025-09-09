@@ -20,6 +20,222 @@ tags:
   - name: Conversations
     description: Freshchat facilitates interactions between an organization and its end-user. These interactions are recorded as conversations. Agents and users can initiate conversations and subsequently send messages to conversations. Agents and bots can handle conversations. Conversations can be auto-assigned or manually assigned to a group or agent.
 paths:
+  /conversations/{conversation_id}:
+    get:
+      description: Get conversation by Id
+      operationId: get_conversation
+      parameters:
+      - example: c2937604-0a08-43c2-a09c-e77f5f565a0e
+        in: path
+        name: conversation_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/conversation'
+          description: Success Request
+          headers:
+            X-RateLimit-Limit:
+              description: Maximum number of operations allowed in the current window.
+              schema:
+                format: int32
+                type: integer
+            X-RateLimit-Remaining:
+              description: Number of operations left in the current window
+              schema:
+                format: int32
+                type: integer
+            X-RateLimit-Reset:
+              description: Time when rate limit window will be reset as a Unix timestamp.
+              schema:
+                format: int32
+                type: integer
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+          description: Bad Request
+          headers:
+            X-RateLimit-Limit:
+              description: Maximum number of operations allowed in the current window.
+              schema:
+                format: int32
+                type: integer
+            X-RateLimit-Remaining:
+              description: Number of operations left in the current window
+              schema:
+                format: int32
+                type: integer
+            X-RateLimit-Reset:
+              description: Time when rate limit window will be reset as a Unix timestamp.
+              schema:
+                format: int32
+                type: integer
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+          description: Unauthenticated Request
+          headers:
+            X-RateLimit-Limit:
+              description: Maximum number of operations allowed in the current window.
+              schema:
+                format: int32
+                type: integer
+            X-RateLimit-Remaining:
+              description: Number of operations left in the current window
+              schema:
+                format: int32
+                type: integer
+            X-RateLimit-Reset:
+              description: Time when rate limit window will be reset as a Unix timestamp.
+              schema:
+                format: int32
+                type: integer
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+          description: Forbidden
+          headers:
+            X-RateLimit-Limit:
+              description: Maximum number of operations allowed in the current window.
+              schema:
+                format: int32
+                type: integer
+            X-RateLimit-Remaining:
+              description: Number of operations left in the current window
+              schema:
+                format: int32
+                type: integer
+            X-RateLimit-Reset:
+              description: Time when rate limit window will be reset as a Unix timestamp.
+              schema:
+                format: int32
+                type: integer
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+          description: Not Found
+          headers:
+            X-RateLimit-Limit:
+              description: Maximum number of operations allowed in the current window.
+              schema:
+                format: int32
+                type: integer
+            X-RateLimit-Remaining:
+              description: Number of operations left in the current window
+              schema:
+                format: int32
+                type: integer
+            X-RateLimit-Reset:
+              description: Time when rate limit window will be reset as a Unix timestamp.
+              schema:
+                format: int32
+                type: integer
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+          description: Conflict
+          headers:
+            X-RateLimit-Limit:
+              description: Maximum number of operations allowed in the current window.
+              schema:
+                format: int32
+                type: integer
+            X-RateLimit-Remaining:
+              description: Number of operations left in the current window
+              schema:
+                format: int32
+                type: integer
+            X-RateLimit-Reset:
+              description: Time when rate limit window will be reset as a Unix timestamp.
+              schema:
+                format: int32
+                type: integer
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+          description: Too Many Requests
+          headers:
+            X-RateLimit-Limit:
+              description: Maximum number of operations allowed in the current window.
+              schema:
+                format: int32
+                type: integer
+            X-RateLimit-Remaining:
+              description: Number of operations left in the current window
+              schema:
+                format: int32
+                type: integer
+            X-RateLimit-Reset:
+              description: Time when rate limit window will be reset as a Unix timestamp.
+              schema:
+                format: int32
+                type: integer
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+          description: Internal Server Error
+          headers:
+            X-RateLimit-Limit:
+              description: Maximum number of operations allowed in the current window.
+              schema:
+                format: int32
+                type: integer
+            X-RateLimit-Remaining:
+              description: Number of operations left in the current window
+              schema:
+                format: int32
+                type: integer
+            X-RateLimit-Reset:
+              description: Time when rate limit window will be reset as a Unix timestamp.
+              schema:
+                format: int32
+                type: integer
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+          description: Service Unavailable
+          headers:
+            X-RateLimit-Limit:
+              description: Maximum number of operations allowed in the current window.
+              schema:
+                format: int32
+                type: integer
+            X-RateLimit-Remaining:
+              description: Number of operations left in the current window
+              schema:
+                format: int32
+                type: integer
+            X-RateLimit-Reset:
+              description: Time when rate limit window will be reset as a Unix timestamp.
+              schema:
+                format: int32
+                type: integer
+      summary: Retrieves existing conversation
+      tags:
+      - Conversations
   /conversations/{conversation_id}/messages:
     post:
       operationId: reply_conversation
@@ -45,175 +261,6 @@ paths:
       tags:
       - Conversations
   /conversations/{id}:
-    get:
-      description: Get conversation by Id
-      operationId: get_conversation
-      parameters:
-      - in: path
-        name: id
-        required: true
-        schema:
-          format: uuid
-          type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: Success Request
-          headers:
-            X-RateLimit-Limit:
-              description: Maximum number of operations allowed in the current window.
-              format: int32
-              type: integer
-            X-RateLimit-Remaining:
-              description: Number of operations left in the current window
-              format: int32
-              type: integer
-            X-RateLimit-Reset:
-              description: Time when rate limit window will be reset as a Unix timestamp.
-              format: int32
-              type: integer
-          schema:
-            $ref: '#/definitions/conversation'
-        "400":
-          description: Bad Request
-          headers:
-            X-RateLimit-Limit:
-              description: Maximum number of operations allowed in the current window.
-              format: int32
-              type: integer
-            X-RateLimit-Remaining:
-              description: Number of operations left in the current window
-              format: int32
-              type: integer
-            X-RateLimit-Reset:
-              description: Time when rate limit window will be reset as a Unix timestamp.
-              format: int32
-              type: integer
-          schema:
-            $ref: '#/definitions/error'
-        "401":
-          description: Unauthenticated Request
-          headers:
-            X-RateLimit-Limit:
-              description: Maximum number of operations allowed in the current window.
-              format: int32
-              type: integer
-            X-RateLimit-Remaining:
-              description: Number of operations left in the current window
-              format: int32
-              type: integer
-            X-RateLimit-Reset:
-              description: Time when rate limit window will be reset as a Unix timestamp.
-              format: int32
-              type: integer
-          schema:
-            $ref: '#/definitions/error'
-        "403":
-          description: Forbidden
-          headers:
-            X-RateLimit-Limit:
-              description: Maximum number of operations allowed in the current window.
-              format: int32
-              type: integer
-            X-RateLimit-Remaining:
-              description: Number of operations left in the current window
-              format: int32
-              type: integer
-            X-RateLimit-Reset:
-              description: Time when rate limit window will be reset as a Unix timestamp.
-              format: int32
-              type: integer
-          schema:
-            $ref: '#/definitions/error'
-        "404":
-          description: Not Found
-          headers:
-            X-RateLimit-Limit:
-              description: Maximum number of operations allowed in the current window.
-              format: int32
-              type: integer
-            X-RateLimit-Remaining:
-              description: Number of operations left in the current window
-              format: int32
-              type: integer
-            X-RateLimit-Reset:
-              description: Time when rate limit window will be reset as a Unix timestamp.
-              format: int32
-              type: integer
-          schema:
-            $ref: '#/definitions/error'
-        "409":
-          description: Conflict
-          headers:
-            X-RateLimit-Limit:
-              description: Maximum number of operations allowed in the current window.
-              format: int32
-              type: integer
-            X-RateLimit-Remaining:
-              description: Number of operations left in the current window
-              format: int32
-              type: integer
-            X-RateLimit-Reset:
-              description: Time when rate limit window will be reset as a Unix timestamp.
-              format: int32
-              type: integer
-          schema:
-            $ref: '#/definitions/error'
-        "429":
-          description: Too Many Requests
-          headers:
-            X-RateLimit-Limit:
-              description: Maximum number of operations allowed in the current window.
-              format: int32
-              type: integer
-            X-RateLimit-Remaining:
-              description: Number of operations left in the current window
-              format: int32
-              type: integer
-            X-RateLimit-Reset:
-              description: Time when rate limit window will be reset as a Unix timestamp.
-              format: int32
-              type: integer
-          schema:
-            $ref: '#/definitions/error'
-        "500":
-          description: Internal Server Error
-          headers:
-            X-RateLimit-Limit:
-              description: Maximum number of operations allowed in the current window.
-              format: int32
-              type: integer
-            X-RateLimit-Remaining:
-              description: Number of operations left in the current window
-              format: int32
-              type: integer
-            X-RateLimit-Reset:
-              description: Time when rate limit window will be reset as a Unix timestamp.
-              format: int32
-              type: integer
-          schema:
-            $ref: '#/definitions/error'
-        "503":
-          description: Service Unavailable
-          headers:
-            X-RateLimit-Limit:
-              description: Maximum number of operations allowed in the current window.
-              format: int32
-              type: integer
-            X-RateLimit-Remaining:
-              description: Number of operations left in the current window
-              format: int32
-              type: integer
-            X-RateLimit-Reset:
-              description: Time when rate limit window will be reset as a Unix timestamp.
-              format: int32
-              type: integer
-          schema:
-            $ref: '#/definitions/error'
-      summary: Retrieves existing conversation
-      tags:
-      - Conversations
     put:
       operationId: update_conversation
       parameters:
@@ -240,6 +287,44 @@ paths:
       - Conversations
 components:
   schemas:
+    Link:
+      properties:
+        deprecation:
+          example: string
+          type: string
+          xml:
+            attribute: true
+        href:
+          example: string
+          type: string
+          xml:
+            attribute: true
+        hreflang:
+          example: string
+          type: string
+          xml:
+            attribute: true
+        media:
+          example: string
+          type: string
+          xml:
+            attribute: true
+        rel:
+          example: string
+          type: string
+          xml:
+            attribute: true
+        title:
+          example: string
+          type: string
+          xml:
+            attribute: true
+        type:
+          example: string
+          type: string
+          xml:
+            attribute: true
+      type: object
     ReplyConversationRequest:
       properties:
         actor_id:
@@ -277,6 +362,24 @@ components:
           type: array
         user_id:
           type: string
+      type: object
+    Status:
+      description: Status model
+      properties:
+        id:
+          example: 8e755ebf-6921-465d-b713-985a8ad13c04
+          type: string
+        name:
+          example: Tea break
+          type: string
+      type: object
+    StatusList:
+      description: List of status
+      properties:
+        states:
+          items:
+            $ref: '#/components/schemas/Status'
+          type: array
       type: object
     UpdateConversationRequest:
       properties:
@@ -328,1429 +431,1347 @@ components:
         user_id:
           type: string
       type: object
-definitions:
-  Link:
-    properties:
-      deprecation:
-        example: string
-        type: string
-        xml:
-          attribute: true
-      href:
-        example: string
-        type: string
-        xml:
-          attribute: true
-      hreflang:
-        example: string
-        type: string
-        xml:
-          attribute: true
-      media:
-        example: string
-        type: string
-        xml:
-          attribute: true
-      rel:
-        example: string
-        type: string
-        xml:
-          attribute: true
-      title:
-        example: string
-        type: string
-        xml:
-          attribute: true
-      type:
-        example: string
-        type: string
-        xml:
-          attribute: true
-    type: object
-  Status:
-    description: Status model
-    properties:
-      id:
-        example: 8e755ebf-6921-465d-b713-985a8ad13c04
-        type: string
-      name:
-        example: Tea break
-        type: string
-    type: object
-  StatusList:
-    description: List of status
-    properties:
-      states:
-        items:
-          $ref: '#/definitions/Status'
-        type: array
-    type: object
-  agent:
-    description: agent model
-    properties:
-      agent_status:
-        $ref: '#/definitions/Status'
-      availability_status:
-        enum:
-        - AVAILABLE
-        - UNAVAILABLE
-        example: AVAILABLE
-        type: string
-      avatar:
-        $ref: '#/definitions/image'
-      biography:
-        example: I'm your friendly neighbourhood support guy!
-        type: string
-      email:
-        description: email
-        example: govind.patel@freshworks.com
-        type: string
-      first_name:
-        description: first_name
-        example: Govind
-        type: string
-      freshid_uuid:
-        example: d01faba8-6655-4cce-88fa-a596cc75ece5
-        type: string
-      get_ocr_available:
-        example: 0
-        format: int32
-        type: integer
-      groups:
-        example: '[string1, string2]'
-        items:
-          type: string
-        type: array
-      id:
-        description: id
-        example: 2681d294-3460-4f32-b5fb-828958995b5c
-        readOnly: true
-        type: string
-      is_deactivated:
-        example: false
-        type: boolean
-      last_name:
-        description: last_name
-        example: Patel
-        type: string
-      locale:
-        example: en-us
-        type: string
-      phone:
-        example: "123456789"
-        type: string
-      role_id:
-        example: string
-        type: string
-      routing_type:
-        enum:
-        - OCR
-        - INTELLIASSIGN
-        - DISABLED
-        example: OCR
-        type: string
-      skill_id:
-        example: d01faba8-6655-4cce-88fa-a596cc75ece5
-        type: string
-      social_profiles:
-        items:
-          $ref: '#/definitions/social_profile'
-        type: array
-      timezone:
-        example: Asia/Kolkata
-        type: string
-    type: object
-  agents:
-    description: agents model
-    properties:
-      agents:
-        items:
-          $ref: '#/definitions/agent'
-        type: array
-      links:
-        $ref: '#/definitions/links'
-      pagination:
-        $ref: '#/definitions/pagination'
-    type: object
-  async_reports_response:
-    description: Response for async fetch reports call
-    properties:
-      id:
-        description: report id to fetch the status and url of the requested report
-        example: 1ac520cf-b1a4-4741-8b01-e383563ae402
-        type: string
-      link:
-        $ref: '#/definitions/Link'
-        description: Url link for the get call to access the results of submitted query
-    type: object
-  body:
-    description: body for components
-    properties:
-      params:
-        description: text params
-        items:
-          $ref: '#/definitions/params'
-        type: array
-    type: object
-  callback_part:
-    description: callback part
-    properties:
-      label:
-        description: label
-        example: "\U0001F44D upvote"
-        type: string
-      payload:
-        description: payload
-        example: '{"id":"483b0c7a-583e-4d5f-a486-9028cdc39e24", "vote":"1"}'
-        type: string
-    required:
-    - label
-    - payload
-    type: object
-  channel:
-    description: channel model
-    properties:
-      assign_to_group:
-        $ref: '#/definitions/group'
-      enabled:
-        example: true
-        type: boolean
-      icon:
-        $ref: '#/definitions/image'
-      id:
-        description: id
-        example: 6c03caf2-a37f-45a2-a9a3-6e03aa7b85f5
-        type: string
-      locale:
-        example: en-Us
-        type: string
-      name:
-        example: Inbox
-        type: string
-      public:
-        example: true
-        type: boolean
-      tags:
-        example: '[sales, support]'
-        items:
-          type: string
-        type: array
-        uniqueItems: true
-      updated_time:
-        example: "2020-05-11 17:52:48.414"
-        format: date-time
-        type: string
-      welcome_message:
-        $ref: '#/definitions/message'
-    required:
-    - name
-    - tags
-    type: object
-  channels:
-    description: channels model
-    properties:
-      channels:
-        items:
-          $ref: '#/definitions/channel'
-        type: array
-      links:
-        $ref: '#/definitions/links'
-      pagination:
-        $ref: '#/definitions/pagination'
-    type: object
-  collection_part:
-    description: collection part
-    properties:
-      sub_parts:
-        items:
-          $ref: '#/definitions/message_part'
-        type: array
-    required:
-    - sub_parts
-    type: object
-  conversation:
-    description: conversation model
-    properties:
-      agents:
-        items:
-          $ref: '#/definitions/agent'
-        type: array
-      app_id:
-        example: 9d83ebc5-e036-4b48-b655-b0d79584b2c5
-        type: string
-      assigned_agent_id:
-        example: c2937604-0a08-43c2-a09c-e77f5f565a0e
-        type: string
-      assigned_group_id:
-        example: c2937604-0a08-43c2-a09c-e77f5f565a0e
-        type: string
-      channel_id:
-        example: 2681d294-3460-4f32-b5fb-828958995b5c
-        type: string
-      conversation_id:
-        example: c2937604-0a08-43c2-a09c-e77f5f565a0e
-        type: string
-      messages:
-        items:
-          $ref: '#/definitions/message'
-        type: array
-      status:
-        enum:
-        - new
-        - assigned
-        - resolved
-        - reopened
-        example: new
-        type: string
-      users:
-        items:
-          $ref: '#/definitions/user'
-        type: array
-    required:
-    - app_id
-    - assigned_agent_id
-    - assigned_group_id
-    - conversation_id
-    - messages
-    - status
-    type: object
-  conversation_list_response:
-    description: get Conversations for a given user
-    properties:
-      conversations:
-        description: list of conversations belonging to the userId
-        items:
-          $ref: '#/definitions/transcript_conversation_response'
-        type: array
-    type: object
-  data:
-    description: Data sent to the recipient
-    properties:
-      message_template:
-        $ref: '#/definitions/message_template'
-        description: WhatsApp message template
-    type: object
-  error:
-    description: error model
-    properties:
-      code:
-        example: 404
-        format: int32
-        type: integer
-      details:
-        items:
-          $ref: '#/definitions/error_detail'
-        type: array
-      message:
-        enum:
-        - The page does not exist in the search result
-        - This agent does not exist
-        example: Agent does not exist
-        type: string
-      status:
-        enum:
-        - WRONG_PAGE
-        - AGENT_NOT_FOUND
-        example: AGENT_NOT_FOUND
-        type: string
-    required:
-    - code
-    - message
-    - status
-    type: object
-  error_detail:
-    description: error detail model
-    properties:
-      type:
-        example: ERROR
-        type: string
-    type: object
-  extract_api_request:
-    description: Request body for extract api
-    properties:
-      end:
-        example: "2019-05-25T10:00:00.000Z"
-        type: string
-      event:
-        enum:
-        - Agent-Activity
-        - Agent-Intelliassign-Activity
-        - Conversation-Agent-Assigned
-        - Conversation-Group-Assigned
-        - Conversation-Created
-        - Conversation-Resolved
-        - Conversation-Resolution-Label
-        - Message-Sent
-        - CSAT-Score
-        - First-Response-Time
-        - Response-Time
-        - Resolution-Time
-        example: Conversation-Agent-Assigned
-        type: string
-      format:
-        enum:
-        - csv
-        example: csv
-        type: string
-      start:
-        example: "2019-05-20T10:00:00.000Z"
-        type: string
-    required:
-    - end
-    - event
-    - format
-    - start
-    type: object
-  filter:
-    description: Filters applied to obtain result
-    properties:
-      metric_filters:
-        items:
-          $ref: '#/definitions/key_value_pair'
-        readOnly: true
-        type: array
-    type: object
-  group:
-    description: group model
-    properties:
-      agents:
-        items:
-          $ref: '#/definitions/agent'
-        type: array
-        uniqueItems: true
-      description:
-        description: description
-        example: Support
-        type: string
-      id:
-        description: id
-        example: 6c03caf2-a37f-45a2-a9a3-6e03aa7b85f5
-        type: string
-      name:
-        description: name
-        example: Support
-        type: string
-      routing_type:
-        description: routing_type
-        example: OCR,DISABLED
-        type: string
-    required:
-    - agents
-    - id
-    - name
-    type: object
-  groups:
-    description: groups model
-    properties:
-      groups:
-        items:
-          $ref: '#/definitions/group'
-        type: array
-      links:
-        $ref: '#/definitions/links'
-      pagination:
-        $ref: '#/definitions/pagination'
-    type: object
-  header:
-    description: header for components
-    properties:
-      media_url:
-        description: media_url
-        example: https://sample.in/sample.jpg
-        type: string
-      params:
-        description: text params
-        items:
-          $ref: '#/definitions/params'
-        type: array
-      type:
-        description: type
-        example: image
-        type: string
-    required:
-    - media_url
-    - type
-    type: object
-  historic_values_per_grouping:
-    description: Values for the metric over the time period requested, per grouping.
-    properties:
-      groupings:
-        items:
-          $ref: '#/definitions/key_value_pair'
-        readOnly: true
-        type: array
-      series:
-        items:
-          $ref: '#/definitions/values_across_time_periods'
-        readOnly: true
-        type: array
-    type: object
-  historical_metrics:
-    description: Response for historical dashboard metrics API
-    properties:
-      aggregator:
-        enum:
-        - min
-        - max
-        - avg
-        - median
-        - 90th_percentile
-        example: median
-        readOnly: true
-        type: string
-      data:
-        items:
-          $ref: '#/definitions/historic_values_per_grouping'
-        readOnly: true
-        type: array
-      end:
-        example: "2019-05-31T15:30:00.000+05:30"
-        readOnly: true
-        type: string
-      filters:
-        $ref: '#/definitions/filter'
-        readOnly: true
-      interval:
-        enum:
-        - 1m
-        - 5m
-        - 15m
-        - 30m
-        - 1h
-        - 1d
-        - 1W
-        - 1M
-        example: 1h
-        readOnly: true
-        type: string
-      metric:
-        example: team_performance.first_response_time
-        items:
-          type: string
-        readOnly: true
-        type: array
-      start:
-        example: "2019-01-01T15:30:00.000+05:30"
-        readOnly: true
-        type: string
-    type: object
-  image:
-    description: image model
-    properties:
-      url:
-        example: https://web.freshchat.com/img/johndoe.png
-        type: string
-    type: object
-  image_part:
-    description: image part
-    properties:
-      url:
-        description: url
-        example: www.example.com
-        type: string
-    required:
-    - url
-    type: object
-  image_response:
-    description: image model
-    properties:
-      content_type:
-        example: image/jpg
-        type: string
-      height:
-        example: 200
-        format: int64
-        type: integer
-      id:
-        example: 96738e3d-9473-45c5-9eeb-cfe5e4da2434
-        readOnly: true
-        type: string
-      name:
-        example: img_1604986580513.jpeg
-        type: string
-      thumbnail:
-        $ref: '#/definitions/thumbnail'
-      url:
-        example: https://chat.s3.amazonaws.com/f_marketingpicFull/u_8ace8de9b2545716308776dc1df471f347f1057db625ce8ee57b713146b8023a/img_1602510533617.png
-        type: string
-      width:
-        example: 100
-        format: int64
-        type: integer
-    type: object
-  in_reply_to:
-    description: message reply info model
-    properties:
-      message_id:
-        description: message_id
-        example: 6c03caf2-a37f-45a2-a9a3-6e03aa7b85f5
-        type: string
-    type: object
-  instant_metrics:
-    description: Instant metrics API response
-    properties:
-      data:
-        items:
-          $ref: '#/definitions/instant_values_per_grouping'
-        readOnly: true
-        type: array
-      filters:
-        $ref: '#/definitions/filter'
-        readOnly: true
-      metric:
-        example: team_presence.online
-        readOnly: true
-        type: string
-    type: object
-  instant_value:
-    description: Values for a given metric, will include count and reference to the
-      resources based on the request
-    properties:
-      count:
-        example: 23
-        format: int64
-        readOnly: true
-        type: integer
-      key:
-        example: team_member.online
-        readOnly: true
-        type: string
-      resources:
-        items:
-          $ref: '#/definitions/resources'
-        readOnly: true
-        type: array
-    type: object
-  instant_values_per_grouping:
-    description: Values at the current instant for a metric per grouping
-    properties:
-      groupings:
-        items:
-          $ref: '#/definitions/key_value_pair'
-        readOnly: true
-        type: array
-      values:
-        items:
-          $ref: '#/definitions/instant_value'
-        readOnly: true
-        type: array
-    type: object
-  key_value_pair:
-    description: Key value info for groupings and filters
-    properties:
-      key:
-        example: group
-        readOnly: true
-        type: string
-      value:
-        example: 938899D8-41DE-48DF-A1DE-3B02F0560ED6
-        readOnly: true
-        type: string
-    type: object
-  language:
-    description: language
-    properties:
-      code:
-        description: code
-        example: en_US
-        type: string
-      policy:
-        description: policy
-        enum:
-        - deterministic
-        example: deterministic
-        type: string
-    required:
-    - code
-    - policy
-    type: object
-  link:
-    description: link model
-    properties:
-      href:
-        example: /v1/groups?sort_by=name&items_per_page=10&sort_order=asc&page=3
-        type: string
-      rel:
-        enum:
-        - group
-        - user
-        - message
-        - agent
-        example: group
-        type: string
-      type:
-        example: GET
-        type: string
-    type: object
-  links:
-    description: links model
-    properties:
-      first_page:
-        $ref: '#/definitions/link'
-      last_page:
-        $ref: '#/definitions/link'
-      next_page:
-        $ref: '#/definitions/link'
-      previous_page:
-        $ref: '#/definitions/link'
-    type: object
-  message:
-    description: message model
-    properties:
-      actor_id:
-        example: 9d304e8a-31fd-4e4a-85e8-b62edb95d53f
-        type: string
-      actor_type:
-        enum:
-        - agent
-        - user
-        example: agent
-        type: string
-      app_id:
-        example: d01f83a4-6af0-4a05-8906-47284db2e1a8
-        type: string
-      channel_id:
-        example: 1b99afe4-7b3d-4f9e-b284-d7778b249f6e
-        type: string
-      conversation_id:
-        example: da8de71b-78c8-4256-8923-0de858ff6a80
-        type: string
-      created_time:
-        example: "2017-11-16T11:34:04.431Z"
-        format: date-time
-        type: string
-      id:
-        description: id
-        example: 6c03caf2-a37f-45a2-a9a3-6e03aa7b85f5
-        type: string
-      in_reply_to:
-        $ref: '#/definitions/in_reply_to'
-      message_parts:
-        items:
-          $ref: '#/definitions/message_part'
-        type: array
-      message_source:
-        enum:
-        - INVALID
-        - SYSTEM
-        - WEB
-        - MOBILE
-        - API
-        - FB_MESSENGER
-        - FRESHDESK
-        - ZENDESK
-        - SMOOCH
-        - FB_NATIVE
-        example: WEB
-        type: string
-      message_type:
-        enum:
-        - normal
-        - private
-        example: normal
-        type: string
-      meta_data:
-        additionalProperties:
-          type: object
-        example: '{"isResolved" : "true"}'
-        type: object
-      reply_parts:
-        items:
-          $ref: '#/definitions/message_part'
-        type: array
-    required:
-    - actor_type
-    - app_id
-    - channel_id
-    - conversation_id
-    - message_parts
-    - message_type
-    type: object
-  message_part:
-    description: message part model. Exactly one part should be present
-    properties:
-      callback:
-        $ref: '#/definitions/callback_part'
-      collection:
-        $ref: '#/definitions/collection_part'
-      image:
-        $ref: '#/definitions/image_part'
-      quick_reply_button:
-        $ref: '#/definitions/quick_reply_button_part'
-      reference:
-        $ref: '#/definitions/reference_part'
-      template_content:
-        $ref: '#/definitions/template_content'
-      text:
-        $ref: '#/definitions/text_part'
-      url_button:
-        $ref: '#/definitions/url_button_part'
-    type: object
-  message_template:
-    description: whatsapp message template
-    properties:
-      language:
-        $ref: '#/definitions/language'
-        description: language
-      namespace:
-        description: Whatsapp template namespace
-        example: XXXXXXXX_XXXX_XXXX_XXXX_XXXXXXXXXXXX
-        type: string
-      rich_template_data:
-        $ref: '#/definitions/rich_media_template_data'
-        description: rich_template_data
-      storage:
-        description: storage
-        enum:
-        - none
-        example: none
-        type: string
-      template_data:
-        description: template_data
-        items:
-          $ref: '#/definitions/template_data'
-        type: array
-      template_name:
-        description: whatsapp template name
-        example: hello_world
-        type: string
-    required:
-    - language
-    - namespace
-    - storage
-    - template_data
-    - template_name
-    type: object
-  outbound_message:
-    description: outbound message
-    properties:
-      created_on:
-        description: message created timestamp in epoch format
-        example: 1566970961
-        format: int64
-        type: integer
-      data:
-        $ref: '#/definitions/data'
-        description: data sent to the recipient
-      failure_code:
-        description: failure code
-        example: OBM001
-        type: string
-      failure_reason:
-        description: reason for the failure
-        example: no template exists
-        type: string
-      from:
-        $ref: '#/definitions/user_handle'
-        description: sender identifier
-        example: "+919876543210"
-      message_id:
-        description: message id
-        example: 5841b28c-7869-474f-9b25-c2b1ba9aa7b9
-        type: string
-      provider:
-        description: medium to send outbound messages
-        enum:
-        - whatsapp
-        example: whatsapp
-        type: string
-      request_id:
-        description: identifier for every request
-        example: 5841b28c-7869-474f-9b25-c2b1ba9aa7b9
-        type: string
-      status:
-        description: status of the message
-        enum:
-        - Accepted
-        - Sent
-        - Delivered
-        - Failed
-        example: Sent
-        type: string
-      to:
-        $ref: '#/definitions/user_handle'
-        description: recipient details
-        example: "+919876543210"
-    required:
-    - created_on
-    - data
-    - from
-    - message_id
-    - provider
-    - request_id
-    - status
-    - to
-    type: object
-  outbound_message_response:
-    description: outbound message response
-    properties:
-      outbound_messages:
-        description: outbound messages
-        items:
-          $ref: '#/definitions/outbound_message'
-        type: array
-    required:
-    - outbound_messages
-    type: object
-  outbound_message_send_resp:
-    description: outbound message send response
-    properties:
-      link:
-        $ref: '#/definitions/Link'
-        description: link for the request status
-        example: '{rel:request,href:/v2/outbound-messages?request_id=b59fbf29-5791-48f9-bda5-7bc45fdb28f6}'
-      request_id:
-        description: request identifier
-        example: 0fcdd6b6-1f80-4643-a294-8e0625ce30dd
-        type: string
-      request_process_time:
-        description: request processing time in seconds
-        example: "1"
-        type: string
-    required:
-    - link
-    - request_id
-    - request_process_time
-    type: object
-  pagination:
-    description: pagination model
-    properties:
-      current_page:
-        example: 2
-        format: int32
-        type: integer
-      items_per_page:
-        example: 10
-        format: int32
-        type: integer
-      total_items:
-        example: 100
-        format: int32
-        type: integer
-      total_pages:
-        example: 10
-        format: int32
-        type: integer
-    type: object
-  params:
-    description: params for header and body
-    properties:
-      data:
-        description: data
-        example: Duraivel
-        type: string
-    type: object
-  patch_agent_model:
-    description: patch agent model
-    properties:
-      agent_status:
-        $ref: '#/definitions/patch_agent_status'
-      availability_status:
-        enum:
-        - AVAILABLE
-        - UNAVAILABLE
-        example: AVAILABLE
-        type: string
-    type: object
-  patch_agent_response_model:
-    description: patch agent model
-    properties:
-      agent_status:
-        $ref: '#/definitions/Status'
-      availability_status:
-        enum:
-        - AVAILABLE
-        - UNAVAILABLE
-        example: AVAILABLE
-        type: string
-    type: object
-  patch_agent_status:
-    description: If both availability_status and agent_status are present, agent_status
-      will take more precedence over availability_status value
-    properties:
-      id:
-        example: 8e755ebf-6921-465d-b713-985a8ad13c04
-        type: string
-    type: object
-  property:
-    description: property model
-    properties:
-      name:
-        description: name
-        example: orderId
-        type: string
-      value:
-        description: value
-        example: '#1242'
-        type: string
-    required:
-    - name
-    - value
-    type: object
-  quick_reply_button_part:
-    description: quick reply button part
-    properties:
-      custom_reply_text:
-        description: customReplyText
-        example: string
-        type: string
-      label:
-        description: label
-        example: string
-        type: string
-      payload:
-        description: payload
-        example: string
-        type: string
-    required:
-    - label
-    type: object
-  reference_part:
-    description: Reference Part
-    properties:
-      label:
-        description: label
-        example: string
-        type: string
-      reference_id:
-        description: reference_id
-        example: 6c03caf2-a37f-45a2-a9a3-6e03aa7b85f9
-        type: string
-    required:
-    - label
-    type: object
-  reports-response-v1:
-    description: Response for GET reports call with a singular link
-    properties:
-      id:
-        description: Unique Id given to the customers for the requested query
-        example: 1ac520cf-b1a4-4741-8b01-e383563ae402
-        type: string
-      link:
-        $ref: '#/definitions/Link'
-        description: Private URL from which you can download the reports, expires after
-          a fixed time
-        example: https://csat-reports.s3-us-west-2.amazonaws.com/233676087732066-a91025da-cd54-4e79-9c67-b74dd444f268?response-content-disposition=attachment%3B%20filename
-      status:
-        description: Indicates the status of the job results
-        enum:
-        - COMPLETED
-        - FAILED
-        - PENDING
-        example: COMPLETED
-        type: string
-    type: object
-  reports-response-v2:
-    description: Response for GET reports call with sub-reports
-    properties:
-      id:
-        description: Unique Id given to the customers for the requested query
-        example: 1ac520cf-b1a4-4741-8b01-e383563ae402
-        type: string
-      interval:
-        description: Interval between two ranges
-        example: 2019-08-21 05:30:00.0_2019-10-30 23:59:59.0
-        type: string
-      links:
-        description: List of Private URL Links split according to optimal time period.
-        items:
-          $ref: '#/definitions/reports_link'
-        type: array
-      status:
-        description: Indicates the status of the job results
-        enum:
-        - COMPLETED
-        - FAILED
-        - PENDING
-        example: COMPLETED
-        type: string
-    type: object
-  reports_api_request:
-    description: Request body for reports api post request
-    properties:
-      aggregator:
-        description: list of aggregators which can be applied
-        enum:
-        - avg
-        - median
-        - p90
-        example: string
-        type: string
-      end:
-        example: "2019-05-25T10:00:00.000Z"
-        format: date
-        type: string
-      filter_by:
-        description: filtering params
-        enum:
-        - group
-        example: group%3D1%2Cgroup%3D2
-        type: string
-      name:
-        description: report name to query
-        enum:
-        - team_performance
-        - helpdesk
-        example: string
-        type: string
-      start:
-        example: "2019-05-20T10:00:00.000Z"
-        format: date
-        type: string
-    required:
-    - end
-    - name
-    - start
-    type: object
-  reports_link:
-    description: list of private URL links split according to optimal time periods
-    properties:
-      from:
-        description: time period from which the sub-report is generated
-        example: "2020-02-09T00:00:00.000Z"
-        format: date-time
-        type: string
-      link:
-        $ref: '#/definitions/Link'
-        description: Private URL from which you can download the reports, expires after
-          a fixed time
-        example: https://csat-reports.s3-us-west-2.amazonaws.com/233676087732066-a91025da-cd54-4e79-9c67-b74dd444f268?response-content-disposition=attachment%3B%20filename
-      status:
-        description: indicates the status of this particular sub-report fetch
-        enum:
-        - PENDING
-        - IN_PROGRESS
-        - FAILED
-        - SUCCESS
-        - COMPLETED
-        example: SUCCESS
-        type: string
-      to:
-        description: time period upto which the sub-report is generated
-        example: "2020-02-15T18:59:59.000Z"
-        format: date-time
-        type: string
-    type: object
-  resources:
-    description: list of resources contained in instantValuePerMetric
-    properties:
-      id:
-        example: uuid1
-        readOnly: true
-        type: string
-    type: object
-  rich_media_template_data:
-    description: for rich media contents
-    properties:
-      body:
-        $ref: '#/definitions/body'
-      header:
-        $ref: '#/definitions/header'
-    type: object
-  role:
-    description: role model
-    properties:
-      description:
-        example: string
-        type: string
-      id:
-        example: string
-        type: string
-      is_custom_role:
-        example: false
-        type: boolean
-      name:
-        example: string
-        type: string
-    required:
-    - id
-    - is_custom_role
-    - name
-    type: object
-  roles:
-    description: roles model
-    properties:
-      links:
-        $ref: '#/definitions/links'
-      pagination:
-        $ref: '#/definitions/pagination'
-      roles:
-        items:
-          $ref: '#/definitions/role'
-        type: array
-    type: object
-  sections:
-    description: template fragment sections
-    properties:
-      name:
-        example: title
-        type: string
-      parts:
-        items:
-          $ref: '#/definitions/message_part'
-        type: array
-    required:
-    - name
-    - parts
-    type: object
-  social_profile:
-    description: social profiles model
-    properties:
-      id:
-        example: govind.patel
-        type: string
-      type:
-        enum:
-        - facebook
-        - twitter
-        - skype
-        - linkedin
-        example: facebook
-        type: string
-    required:
-    - type
-    type: object
-  template_content:
-    description: dynamic message template content part
-    properties:
-      sections:
-        description: sections
-        items:
-          $ref: '#/definitions/sections'
-        type: array
-      type:
-        description: type
-        enum:
-        - carousel
-        - carousel_card_default
-        - quick_reply_dropdown
-        example: quick_reply_dropdown
-        type: string
-    required:
-    - sections
-    - type
-    type: object
-  template_data:
-    description: template data
-    properties:
-      data:
-        description: data
-        example: Arya Stark
-        type: string
-      instance:
-        $ref: '#/definitions/template_data'
-    required:
-    - data
-    type: object
-  text_part:
-    description: text part
-    properties:
-      content:
-        description: This is a sample text message
-        example: string
-        type: string
-    required:
-    - content
-    type: object
-  thumbnail:
-    description: thumbnail model
-    properties:
-      content_type:
-        example: image/png
-        type: string
-      height:
-        example: 100
-        format: int64
-        type: integer
-      url:
-        example: https://chat.s3.amazonaws.com/f_marketingpicFull/u_8ace8de9b2545716308776dc1df471f347f1057db625ce8ee57b713146b8023a/img_1602510533617.png
-        type: string
-      width:
-        example: 200
-        format: int64
-        type: integer
-    type: object
-  transcript_conversation_response:
-    description: conversation details.
-    properties:
-      id:
-        description: conversation id belonging to the given userId
-        example: string
-        type: string
-    type: object
-  transcript_message_response:
-    description: get Messages for a conversation call
-    properties:
-      link:
-        $ref: '#/definitions/Link'
-        description: Url link for the get call to access the next set of results(next
-          page)
-      messages:
-        description: list of messages belonging to the conversation
-        items:
-          $ref: '#/definitions/message'
-        type: array
-    type: object
-  url_button_part:
-    description: url button part
-    properties:
-      label:
-        description: label
-        example: string
-        type: string
-      target:
-        description: target
-        enum:
-        - _self
-        - _blank
-        example: _self
-        type: string
-      url:
-        description: url
-        example: string
-        type: string
-    required:
-    - label
-    - url
-    type: object
-  user:
-    description: user model
-    properties:
-      avatar:
-        $ref: '#/definitions/image'
-      created_time:
-        description: created_time
-        example: "2018-08-16T11:34:04.431Z"
-        format: date-time
-        type: string
-      email:
-        description: email
-        example: govind.patel@freshworks.com
-        type: string
-      first_name:
-        description: first_name
-        example: Govind
-        type: string
-      id:
-        description: id
-        example: 2681d294-3460-4f32-b5fb-828958995b5c
-        type: string
-      last_name:
-        description: last_name
-        example: Patel
-        type: string
-      phone:
-        example: "123456789"
-        type: string
+    agent:
+      description: agent model
       properties:
-        description: user properties
-        items:
-          $ref: '#/definitions/property'
-        type: array
-      reference_id:
-        description: reference_id
-        example: 9d83ebc5-e036-4b48-b655-b0d79584b2c6
-        type: string
-      social_profiles:
-        items:
-          $ref: '#/definitions/social_profile'
-        type: array
-    type: object
-  user_handle:
-    description: User handler to send outbound message
-    properties:
-      phone_number:
-        description: phone number
-        example: "+919999999999"
-        pattern: (^\+[0-9]+[0-9]*$)
-        type: string
-    type: object
-  userIds:
-    description: user Ids model
-    properties:
-      ids:
-        description: ids
-        example:
-        - 9d83ebc5-e036-4b48-b655-b0d79584b2c6
-        - 6d73ebc5-e036-4b48-b655-b0d79584b2c6
-        items:
+        agent_status:
+          $ref: '#/components/schemas/Status'
+        availability_status:
+          enum:
+          - AVAILABLE
+          - UNAVAILABLE
+          example: AVAILABLE
           type: string
-        type: array
-    required:
-    - ids
-    type: object
-  userList:
-    description: List of users model
-    properties:
-      users:
-        items:
-          $ref: '#/definitions/user'
-        type: array
-    type: object
-  users:
-    description: users model
-    properties:
-      links:
-        $ref: '#/definitions/links'
-      pagination:
-        $ref: '#/definitions/pagination'
-      users:
-        items:
-          $ref: '#/definitions/user'
-        type: array
-    type: object
-  value_per_time_period:
-    description: time period key value pairs per valuesAcrossTimePeriods value
-    properties:
-      key:
-        example: csat_metrics.satisfactory_interactions
-        type: string
-      value:
-        example: "23"
-        type: string
-    required:
-    - key
-    - value
-    type: object
-  values_across_time_periods:
-    description: time series data for a given metric
-    properties:
-      end:
-        example: "2019-07-01T00:00:00.000Z"
-        type: string
-      start:
-        example: "2019-06-01T00:00:00.000Z"
-        type: string
-      values:
-        items:
-          $ref: '#/definitions/value_per_time_period'
-        type: array
-    required:
-    - end
-    - start
-    - values
-    type: object
-  whatsapp_message_request:
-    description: Request body to send proactive whatsapp messages
-    properties:
-      data:
-        $ref: '#/definitions/data'
-        description: data to send recipient
-      from:
-        $ref: '#/definitions/user_handle'
-        description: sender identifier
-      to:
-        description: list of recipients
-        items:
-          $ref: '#/definitions/user_handle'
-        maxItems: 10
-        minItems: 1
-        type: array
-    required:
-    - data
-    - from
-    - to
-    type: object
+        avatar:
+          $ref: '#/components/schemas/image'
+        biography:
+          example: I'm your friendly neighbourhood support guy!
+          type: string
+        email:
+          description: email
+          example: govind.patel@freshworks.com
+          type: string
+        first_name:
+          description: first_name
+          example: Govind
+          type: string
+        freshid_uuid:
+          example: d01faba8-6655-4cce-88fa-a596cc75ece5
+          type: string
+        get_ocr_available:
+          example: 0
+          format: int32
+          type: integer
+        groups:
+          example: '[string1, string2]'
+          items:
+            type: string
+          type: array
+        id:
+          description: id
+          example: 2681d294-3460-4f32-b5fb-828958995b5c
+          readOnly: true
+          type: string
+        is_deactivated:
+          example: false
+          type: boolean
+        last_name:
+          description: last_name
+          example: Patel
+          type: string
+        locale:
+          example: en-us
+          type: string
+        phone:
+          example: "123456789"
+          type: string
+        role_id:
+          example: string
+          type: string
+        routing_type:
+          enum:
+          - OCR
+          - INTELLIASSIGN
+          - DISABLED
+          example: OCR
+          type: string
+        skill_id:
+          example: d01faba8-6655-4cce-88fa-a596cc75ece5
+          type: string
+        social_profiles:
+          items:
+            $ref: '#/components/schemas/social_profile'
+          type: array
+        timezone:
+          example: Asia/Kolkata
+          type: string
+      type: object
+    agents:
+      description: agents model
+      properties:
+        agents:
+          items:
+            $ref: '#/components/schemas/agent'
+          type: array
+        links:
+          $ref: '#/components/schemas/links'
+        pagination:
+          $ref: '#/components/schemas/pagination'
+      type: object
+    async_reports_response:
+      description: Response for async fetch reports call
+      properties:
+        id:
+          description: report id to fetch the status and url of the requested report
+          example: 1ac520cf-b1a4-4741-8b01-e383563ae402
+          type: string
+        link:
+          $ref: '#/components/schemas/Link'
+      type: object
+    body:
+      description: body for components
+      properties:
+        params:
+          description: text params
+          items:
+            $ref: '#/components/schemas/params'
+          type: array
+      type: object
+    callback_part:
+      description: callback part
+      properties:
+        label:
+          description: label
+          example: "\U0001F44D upvote"
+          type: string
+        payload:
+          description: payload
+          example: '{"id":"483b0c7a-583e-4d5f-a486-9028cdc39e24", "vote":"1"}'
+          type: string
+      required:
+      - label
+      - payload
+      type: object
+    channel:
+      description: channel model
+      properties:
+        assign_to_group:
+          $ref: '#/components/schemas/group'
+        enabled:
+          example: true
+          type: boolean
+        icon:
+          $ref: '#/components/schemas/image'
+        id:
+          description: id
+          example: 6c03caf2-a37f-45a2-a9a3-6e03aa7b85f5
+          type: string
+        locale:
+          example: en-Us
+          type: string
+        name:
+          example: Inbox
+          type: string
+        public:
+          example: true
+          type: boolean
+        tags:
+          example: '[sales, support]'
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+        updated_time:
+          format: date-time
+          type: string
+        welcome_message:
+          $ref: '#/components/schemas/message'
+      required:
+      - name
+      - tags
+      type: object
+    channels:
+      description: channels model
+      properties:
+        channels:
+          items:
+            $ref: '#/components/schemas/channel'
+          type: array
+        links:
+          $ref: '#/components/schemas/links'
+        pagination:
+          $ref: '#/components/schemas/pagination'
+      type: object
+    collection_part:
+      description: collection part
+      properties:
+        sub_parts:
+          items:
+            $ref: '#/components/schemas/message_part'
+          type: array
+      required:
+      - sub_parts
+      type: object
+    conversation:
+      description: conversation model
+      properties:
+        agents:
+          items:
+            $ref: '#/components/schemas/agent'
+          type: array
+        app_id:
+          example: 9d83ebc5-e036-4b48-b655-b0d79584b2c5
+          type: string
+        assigned_agent_id:
+          example: c2937604-0a08-43c2-a09c-e77f5f565a0e
+          type: string
+        assigned_group_id:
+          example: c2937604-0a08-43c2-a09c-e77f5f565a0e
+          type: string
+        channel_id:
+          example: 2681d294-3460-4f32-b5fb-828958995b5c
+          type: string
+        conversation_id:
+          example: c2937604-0a08-43c2-a09c-e77f5f565a0e
+          type: string
+        messages:
+          items:
+            $ref: '#/components/schemas/message'
+          type: array
+        status:
+          enum:
+          - new
+          - assigned
+          - resolved
+          - reopened
+          example: new
+          type: string
+        users:
+          items:
+            $ref: '#/components/schemas/user'
+          type: array
+      required:
+      - app_id
+      - assigned_agent_id
+      - assigned_group_id
+      - conversation_id
+      - messages
+      - status
+      type: object
+    conversation_list_response:
+      description: get Conversations for a given user
+      properties:
+        conversations:
+          description: list of conversations belonging to the userId
+          items:
+            $ref: '#/components/schemas/transcript_conversation_response'
+          type: array
+      type: object
+    data:
+      description: Data sent to the recipient
+      properties:
+        message_template:
+          $ref: '#/components/schemas/message_template'
+      type: object
+    error:
+      description: error model
+      properties:
+        code:
+          example: 404
+          format: int32
+          type: integer
+        details:
+          items:
+            $ref: '#/components/schemas/error_detail'
+          type: array
+        message:
+          enum:
+          - The page does not exist in the search result
+          - This agent does not exist
+          example: Agent does not exist
+          type: string
+        status:
+          enum:
+          - WRONG_PAGE
+          - AGENT_NOT_FOUND
+          example: AGENT_NOT_FOUND
+          type: string
+      required:
+      - code
+      - message
+      - status
+      type: object
+    error_detail:
+      description: error detail model
+      properties:
+        type:
+          example: ERROR
+          type: string
+      type: object
+    extract_api_request:
+      description: Request body for extract api
+      properties:
+        end:
+          example: "2019-05-25T10:00:00.000Z"
+          type: string
+        event:
+          enum:
+          - Agent-Activity
+          - Agent-Intelliassign-Activity
+          - Conversation-Agent-Assigned
+          - Conversation-Group-Assigned
+          - Conversation-Created
+          - Conversation-Resolved
+          - Conversation-Resolution-Label
+          - Message-Sent
+          - CSAT-Score
+          - First-Response-Time
+          - Response-Time
+          - Resolution-Time
+          example: Conversation-Agent-Assigned
+          type: string
+        format:
+          enum:
+          - csv
+          example: csv
+          type: string
+        start:
+          example: "2019-05-20T10:00:00.000Z"
+          type: string
+      required:
+      - end
+      - event
+      - format
+      - start
+      type: object
+    filter:
+      description: Filters applied to obtain result
+      properties:
+        metric_filters:
+          items:
+            $ref: '#/components/schemas/key_value_pair'
+          readOnly: true
+          type: array
+      type: object
+    group:
+      description: group model
+      properties:
+        agents:
+          items:
+            $ref: '#/components/schemas/agent'
+          type: array
+          uniqueItems: true
+        description:
+          description: description
+          example: Support
+          type: string
+        id:
+          description: id
+          example: 6c03caf2-a37f-45a2-a9a3-6e03aa7b85f5
+          type: string
+        name:
+          description: name
+          example: Support
+          type: string
+        routing_type:
+          description: routing_type
+          example: OCR,DISABLED
+          type: string
+      required:
+      - agents
+      - id
+      - name
+      type: object
+    groups:
+      description: groups model
+      properties:
+        groups:
+          items:
+            $ref: '#/components/schemas/group'
+          type: array
+        links:
+          $ref: '#/components/schemas/links'
+        pagination:
+          $ref: '#/components/schemas/pagination'
+      type: object
+    header:
+      description: header for components
+      properties:
+        media_url:
+          description: media_url
+          example: https://sample.in/sample.jpg
+          type: string
+        params:
+          description: text params
+          items:
+            $ref: '#/components/schemas/params'
+          type: array
+        type:
+          description: type
+          example: image
+          type: string
+      required:
+      - media_url
+      - type
+      type: object
+    historic_values_per_grouping:
+      description: Values for the metric over the time period requested, per grouping.
+      properties:
+        groupings:
+          items:
+            $ref: '#/components/schemas/key_value_pair'
+          readOnly: true
+          type: array
+        series:
+          items:
+            $ref: '#/components/schemas/values_across_time_periods'
+          readOnly: true
+          type: array
+      type: object
+    historical_metrics:
+      description: Response for historical dashboard metrics API
+      properties:
+        aggregator:
+          enum:
+          - min
+          - max
+          - avg
+          - median
+          - 90th_percentile
+          example: median
+          readOnly: true
+          type: string
+        data:
+          items:
+            $ref: '#/components/schemas/historic_values_per_grouping'
+          readOnly: true
+          type: array
+        end:
+          example: "2019-05-31T15:30:00.000+05:30"
+          readOnly: true
+          type: string
+        filters:
+          $ref: '#/components/schemas/filter'
+        interval:
+          enum:
+          - 1m
+          - 5m
+          - 15m
+          - 30m
+          - 1h
+          - 1d
+          - 1W
+          - 1M
+          example: 1h
+          readOnly: true
+          type: string
+        metric:
+          example: team_performance.first_response_time
+          items:
+            type: string
+          readOnly: true
+          type: array
+        start:
+          example: "2019-01-01T15:30:00.000+05:30"
+          readOnly: true
+          type: string
+      type: object
+    image:
+      description: image model
+      properties:
+        url:
+          example: https://web.freshchat.com/img/johndoe.png
+          type: string
+      type: object
+    image_part:
+      description: image part
+      properties:
+        url:
+          description: url
+          example: www.example.com
+          type: string
+      required:
+      - url
+      type: object
+    image_response:
+      description: image model
+      properties:
+        content_type:
+          example: image/jpg
+          type: string
+        height:
+          example: 200
+          format: int64
+          type: integer
+        id:
+          example: 96738e3d-9473-45c5-9eeb-cfe5e4da2434
+          readOnly: true
+          type: string
+        name:
+          example: img_1604986580513.jpeg
+          type: string
+        thumbnail:
+          $ref: '#/components/schemas/thumbnail'
+        url:
+          example: https://chat.s3.amazonaws.com/f_marketingpicFull/u_8ace8de9b2545716308776dc1df471f347f1057db625ce8ee57b713146b8023a/img_1602510533617.png
+          type: string
+        width:
+          example: 100
+          format: int64
+          type: integer
+      type: object
+    in_reply_to:
+      description: message reply info model
+      properties:
+        message_id:
+          description: message_id
+          example: 6c03caf2-a37f-45a2-a9a3-6e03aa7b85f5
+          type: string
+      type: object
+    instant_metrics:
+      description: Instant metrics API response
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/instant_values_per_grouping'
+          readOnly: true
+          type: array
+        filters:
+          $ref: '#/components/schemas/filter'
+        metric:
+          example: team_presence.online
+          readOnly: true
+          type: string
+      type: object
+    instant_value:
+      description: Values for a given metric, will include count and reference to the
+        resources based on the request
+      properties:
+        count:
+          example: 23
+          format: int64
+          readOnly: true
+          type: integer
+        key:
+          example: team_member.online
+          readOnly: true
+          type: string
+        resources:
+          items:
+            $ref: '#/components/schemas/resources'
+          readOnly: true
+          type: array
+      type: object
+    instant_values_per_grouping:
+      description: Values at the current instant for a metric per grouping
+      properties:
+        groupings:
+          items:
+            $ref: '#/components/schemas/key_value_pair'
+          readOnly: true
+          type: array
+        values:
+          items:
+            $ref: '#/components/schemas/instant_value'
+          readOnly: true
+          type: array
+      type: object
+    key_value_pair:
+      description: Key value info for groupings and filters
+      properties:
+        key:
+          example: group
+          readOnly: true
+          type: string
+        value:
+          example: 938899D8-41DE-48DF-A1DE-3B02F0560ED6
+          readOnly: true
+          type: string
+      type: object
+    language:
+      description: language
+      properties:
+        code:
+          description: code
+          example: en_US
+          type: string
+        policy:
+          description: policy
+          enum:
+          - deterministic
+          example: deterministic
+          type: string
+      required:
+      - code
+      - policy
+      type: object
+    linklink:
+      description: link model
+      properties:
+        href:
+          example: /v1/groups?sort_by=name&items_per_page=10&sort_order=asc&page=3
+          type: string
+        rel:
+          enum:
+          - group
+          - user
+          - message
+          - agent
+          example: group
+          type: string
+        type:
+          example: GET
+          type: string
+      type: object
+    links:
+      description: links model
+      properties:
+        first_page:
+          $ref: '#/components/schemas/linklink'
+        last_page:
+          $ref: '#/components/schemas/linklink'
+        next_page:
+          $ref: '#/components/schemas/linklink'
+        previous_page:
+          $ref: '#/components/schemas/linklink'
+      type: object
+    message:
+      description: message model
+      properties:
+        actor_id:
+          example: 9d304e8a-31fd-4e4a-85e8-b62edb95d53f
+          type: string
+        actor_type:
+          enum:
+          - agent
+          - user
+          example: agent
+          type: string
+        app_id:
+          example: d01f83a4-6af0-4a05-8906-47284db2e1a8
+          type: string
+        channel_id:
+          example: 1b99afe4-7b3d-4f9e-b284-d7778b249f6e
+          type: string
+        conversation_id:
+          example: da8de71b-78c8-4256-8923-0de858ff6a80
+          type: string
+        created_time:
+          example: "2017-11-16T11:34:04.431Z"
+          format: date-time
+          type: string
+        id:
+          description: id
+          example: 6c03caf2-a37f-45a2-a9a3-6e03aa7b85f5
+          type: string
+        in_reply_to:
+          $ref: '#/components/schemas/in_reply_to'
+        message_parts:
+          items:
+            $ref: '#/components/schemas/message_part'
+          type: array
+        message_source:
+          enum:
+          - INVALID
+          - SYSTEM
+          - WEB
+          - MOBILE
+          - API
+          - FB_MESSENGER
+          - FRESHDESK
+          - ZENDESK
+          - SMOOCH
+          - FB_NATIVE
+          example: WEB
+          type: string
+        message_type:
+          enum:
+          - normal
+          - private
+          example: normal
+          type: string
+        meta_data:
+          additionalProperties:
+            properties: {}
+            type: object
+          example: '{"isResolved" : "true"}'
+          type: object
+        reply_parts:
+          items:
+            $ref: '#/components/schemas/message_part'
+          type: array
+      required:
+      - actor_type
+      - app_id
+      - channel_id
+      - conversation_id
+      - message_parts
+      - message_type
+      type: object
+    message_part:
+      description: message part model. Exactly one part should be present
+      properties:
+        callback:
+          $ref: '#/components/schemas/callback_part'
+        collection:
+          $ref: '#/components/schemas/collection_part'
+        image:
+          $ref: '#/components/schemas/image_part'
+        quick_reply_button:
+          $ref: '#/components/schemas/quick_reply_button_part'
+        reference:
+          $ref: '#/components/schemas/reference_part'
+        template_content:
+          $ref: '#/components/schemas/template_content'
+        text:
+          $ref: '#/components/schemas/text_part'
+        url_button:
+          $ref: '#/components/schemas/url_button_part'
+      type: object
+    message_template:
+      description: whatsapp message template
+      properties:
+        language:
+          $ref: '#/components/schemas/language'
+        namespace:
+          description: Whatsapp template namespace
+          example: XXXXXXXX_XXXX_XXXX_XXXX_XXXXXXXXXXXX
+          type: string
+        rich_template_data:
+          $ref: '#/components/schemas/rich_media_template_data'
+        storage:
+          description: storage
+          enum:
+          - none
+          example: none
+          type: string
+        template_data:
+          description: template_data
+          items:
+            $ref: '#/components/schemas/template_data'
+          type: array
+        template_name:
+          description: whatsapp template name
+          example: hello_world
+          type: string
+      required:
+      - language
+      - namespace
+      - storage
+      - template_data
+      - template_name
+      type: object
+    outbound_message:
+      description: outbound message
+      properties:
+        created_on:
+          description: message created timestamp in epoch format
+          example: 1566970961
+          format: int64
+          type: integer
+        data:
+          $ref: '#/components/schemas/data'
+        failure_code:
+          description: failure code
+          example: OBM001
+          type: string
+        failure_reason:
+          description: reason for the failure
+          example: no template exists
+          type: string
+        from:
+          $ref: '#/components/schemas/user_handle'
+        message_id:
+          description: message id
+          example: 5841b28c-7869-474f-9b25-c2b1ba9aa7b9
+          type: string
+        provider:
+          description: medium to send outbound messages
+          enum:
+          - whatsapp
+          example: whatsapp
+          type: string
+        request_id:
+          description: identifier for every request
+          example: 5841b28c-7869-474f-9b25-c2b1ba9aa7b9
+          type: string
+        status:
+          description: status of the message
+          enum:
+          - Accepted
+          - Sent
+          - Delivered
+          - Failed
+          example: Sent
+          type: string
+        to:
+          $ref: '#/components/schemas/user_handle'
+      required:
+      - created_on
+      - data
+      - from
+      - message_id
+      - provider
+      - request_id
+      - status
+      - to
+      type: object
+    outbound_message_response:
+      description: outbound message response
+      properties:
+        outbound_messages:
+          description: outbound messages
+          items:
+            $ref: '#/components/schemas/outbound_message'
+          type: array
+      required:
+      - outbound_messages
+      type: object
+    outbound_message_send_resp:
+      description: outbound message send response
+      properties:
+        link:
+          $ref: '#/components/schemas/Link'
+        request_id:
+          description: request identifier
+          example: 0fcdd6b6-1f80-4643-a294-8e0625ce30dd
+          type: string
+        request_process_time:
+          description: request processing time in seconds
+          example: "1"
+          type: string
+      required:
+      - link
+      - request_id
+      - request_process_time
+      type: object
+    pagination:
+      description: pagination model
+      properties:
+        current_page:
+          example: 2
+          format: int32
+          type: integer
+        items_per_page:
+          example: 10
+          format: int32
+          type: integer
+        total_items:
+          example: 100
+          format: int32
+          type: integer
+        total_pages:
+          example: 10
+          format: int32
+          type: integer
+      type: object
+    params:
+      description: params for header and body
+      properties:
+        data:
+          description: data
+          example: Duraivel
+          type: string
+      type: object
+    patch_agent_model:
+      description: patch agent model
+      properties:
+        agent_status:
+          $ref: '#/components/schemas/patch_agent_status'
+        availability_status:
+          enum:
+          - AVAILABLE
+          - UNAVAILABLE
+          example: AVAILABLE
+          type: string
+      type: object
+    patch_agent_response_model:
+      description: patch agent model
+      properties:
+        agent_status:
+          $ref: '#/components/schemas/Status'
+        availability_status:
+          enum:
+          - AVAILABLE
+          - UNAVAILABLE
+          example: AVAILABLE
+          type: string
+      type: object
+    patch_agent_status:
+      description: If both availability_status and agent_status are present, agent_status
+        will take more precedence over availability_status value
+      properties:
+        id:
+          example: 8e755ebf-6921-465d-b713-985a8ad13c04
+          type: string
+      type: object
+    property:
+      description: property model
+      properties:
+        name:
+          description: name
+          example: orderId
+          type: string
+        value:
+          description: value
+          example: '#1242'
+          type: string
+      required:
+      - name
+      - value
+      type: object
+    quick_reply_button_part:
+      description: quick reply button part
+      properties:
+        custom_reply_text:
+          description: customReplyText
+          example: string
+          type: string
+        label:
+          description: label
+          example: string
+          type: string
+        payload:
+          description: payload
+          example: string
+          type: string
+      required:
+      - label
+      type: object
+    reference_part:
+      description: Reference Part
+      properties:
+        label:
+          description: label
+          example: string
+          type: string
+        reference_id:
+          description: reference_id
+          example: 6c03caf2-a37f-45a2-a9a3-6e03aa7b85f9
+          type: string
+      required:
+      - label
+      type: object
+    reports-response-v1:
+      description: Response for GET reports call with a singular link
+      properties:
+        id:
+          description: Unique Id given to the customers for the requested query
+          example: 1ac520cf-b1a4-4741-8b01-e383563ae402
+          type: string
+        link:
+          $ref: '#/components/schemas/Link'
+        status:
+          description: Indicates the status of the job results
+          enum:
+          - COMPLETED
+          - FAILED
+          - PENDING
+          example: COMPLETED
+          type: string
+      type: object
+    reports-response-v2:
+      description: Response for GET reports call with sub-reports
+      properties:
+        id:
+          description: Unique Id given to the customers for the requested query
+          example: 1ac520cf-b1a4-4741-8b01-e383563ae402
+          type: string
+        interval:
+          description: Interval between two ranges
+          example: 2019-08-21 05:30:00.0_2019-10-30 23:59:59.0
+          type: string
+        links:
+          description: List of Private URL Links split according to optimal time period.
+          items:
+            $ref: '#/components/schemas/reports_link'
+          type: array
+        status:
+          description: Indicates the status of the job results
+          enum:
+          - COMPLETED
+          - FAILED
+          - PENDING
+          example: COMPLETED
+          type: string
+      type: object
+    reports_api_request:
+      description: Request body for reports api post request
+      properties:
+        aggregator:
+          description: list of aggregators which can be applied
+          enum:
+          - avg
+          - median
+          - p90
+          example: string
+          type: string
+        end:
+          format: date
+          type: string
+        filter_by:
+          description: filtering params
+          enum:
+          - group
+          example: group%3D1%2Cgroup%3D2
+          type: string
+        name:
+          description: report name to query
+          enum:
+          - team_performance
+          - helpdesk
+          example: string
+          type: string
+        start:
+          format: date
+          type: string
+      required:
+      - end
+      - name
+      - start
+      type: object
+    reports_link:
+      description: list of private URL links split according to optimal time periods
+      properties:
+        from:
+          description: time period from which the sub-report is generated
+          example: "2020-02-09T00:00:00Z"
+          format: date-time
+          type: string
+        link:
+          $ref: '#/components/schemas/Link'
+        status:
+          description: indicates the status of this particular sub-report fetch
+          enum:
+          - PENDING
+          - IN_PROGRESS
+          - FAILED
+          - SUCCESS
+          - COMPLETED
+          example: SUCCESS
+          type: string
+        to:
+          description: time period upto which the sub-report is generated
+          example: "2020-02-15T18:59:59Z"
+          format: date-time
+          type: string
+      type: object
+    resources:
+      description: list of resources contained in instantValuePerMetric
+      properties:
+        id:
+          example: uuid1
+          readOnly: true
+          type: string
+      type: object
+    rich_media_template_data:
+      description: for rich media contents
+      properties:
+        body:
+          $ref: '#/components/schemas/body'
+        header:
+          $ref: '#/components/schemas/header'
+      type: object
+    role:
+      description: role model
+      properties:
+        description:
+          example: string
+          type: string
+        id:
+          example: string
+          type: string
+        is_custom_role:
+          example: false
+          type: boolean
+        name:
+          example: string
+          type: string
+      required:
+      - id
+      - is_custom_role
+      - name
+      type: object
+    roles:
+      description: roles model
+      properties:
+        links:
+          $ref: '#/components/schemas/links'
+        pagination:
+          $ref: '#/components/schemas/pagination'
+        roles:
+          items:
+            $ref: '#/components/schemas/role'
+          type: array
+      type: object
+    sections:
+      description: template fragment sections
+      properties:
+        name:
+          example: title
+          type: string
+        parts:
+          items:
+            $ref: '#/components/schemas/message_part'
+          type: array
+      required:
+      - name
+      - parts
+      type: object
+    social_profile:
+      description: social profiles model
+      properties:
+        id:
+          example: govind.patel
+          type: string
+        type:
+          enum:
+          - facebook
+          - twitter
+          - skype
+          - linkedin
+          example: facebook
+          type: string
+      required:
+      - type
+      type: object
+    template_content:
+      description: dynamic message template content part
+      properties:
+        sections:
+          description: sections
+          items:
+            $ref: '#/components/schemas/sections'
+          type: array
+        type:
+          description: type
+          enum:
+          - carousel
+          - carousel_card_default
+          - quick_reply_dropdown
+          example: quick_reply_dropdown
+          type: string
+      required:
+      - sections
+      - type
+      type: object
+    template_data:
+      description: template data
+      properties:
+        data:
+          description: data
+          example: Arya Stark
+          type: string
+        instance:
+          $ref: '#/components/schemas/template_data'
+      required:
+      - data
+      type: object
+    text_part:
+      description: text part
+      properties:
+        content:
+          description: This is a sample text message
+          example: string
+          type: string
+      required:
+      - content
+      type: object
+    thumbnail:
+      description: thumbnail model
+      properties:
+        content_type:
+          example: image/png
+          type: string
+        height:
+          example: 100
+          format: int64
+          type: integer
+        url:
+          example: https://chat.s3.amazonaws.com/f_marketingpicFull/u_8ace8de9b2545716308776dc1df471f347f1057db625ce8ee57b713146b8023a/img_1602510533617.png
+          type: string
+        width:
+          example: 200
+          format: int64
+          type: integer
+      type: object
+    transcript_conversation_response:
+      description: conversation details.
+      properties:
+        id:
+          description: conversation id belonging to the given userId
+          example: string
+          type: string
+      type: object
+    transcript_message_response:
+      description: get Messages for a conversation call
+      properties:
+        link:
+          $ref: '#/components/schemas/Link'
+        messages:
+          description: list of messages belonging to the conversation
+          items:
+            $ref: '#/components/schemas/message'
+          type: array
+      type: object
+    url_button_part:
+      description: url button part
+      properties:
+        label:
+          description: label
+          example: string
+          type: string
+        target:
+          description: target
+          enum:
+          - _self
+          - _blank
+          example: _self
+          type: string
+        url:
+          description: url
+          example: string
+          type: string
+      required:
+      - label
+      - url
+      type: object
+    user:
+      description: user model
+      properties:
+        avatar:
+          $ref: '#/components/schemas/image'
+        created_time:
+          description: created_time
+          example: "2018-08-16T11:34:04.431Z"
+          format: date-time
+          type: string
+        email:
+          description: email
+          example: govind.patel@freshworks.com
+          type: string
+        first_name:
+          description: first_name
+          example: Govind
+          type: string
+        id:
+          description: id
+          example: 2681d294-3460-4f32-b5fb-828958995b5c
+          type: string
+        last_name:
+          description: last_name
+          example: Patel
+          type: string
+        phone:
+          example: "123456789"
+          type: string
+        properties:
+          description: user properties
+          items:
+            $ref: '#/components/schemas/property'
+          type: array
+        reference_id:
+          description: reference_id
+          example: 9d83ebc5-e036-4b48-b655-b0d79584b2c6
+          type: string
+        social_profiles:
+          items:
+            $ref: '#/components/schemas/social_profile'
+          type: array
+      type: object
+    user_handle:
+      description: User handler to send outbound message
+      properties:
+        phone_number:
+          description: phone number
+          example: "+919999999999"
+          pattern: (^\+[0-9]+[0-9]*$)
+          type: string
+      type: object
+    userIds:
+      description: user Ids model
+      properties:
+        ids:
+          description: ids
+          example:
+          - 9d83ebc5-e036-4b48-b655-b0d79584b2c6
+          - 6d73ebc5-e036-4b48-b655-b0d79584b2c6
+          items:
+            type: string
+          type: array
+      required:
+      - ids
+      type: object
+    userList:
+      description: List of users model
+      properties:
+        users:
+          items:
+            $ref: '#/components/schemas/user'
+          type: array
+      type: object
+    users:
+      description: users model
+      properties:
+        links:
+          $ref: '#/components/schemas/links'
+        pagination:
+          $ref: '#/components/schemas/pagination'
+        users:
+          items:
+            $ref: '#/components/schemas/user'
+          type: array
+      type: object
+    value_per_time_period:
+      description: time period key value pairs per valuesAcrossTimePeriods value
+      properties:
+        key:
+          example: csat_metrics.satisfactory_interactions
+          type: string
+        value:
+          example: "23"
+          type: string
+      required:
+      - key
+      - value
+      type: object
+    values_across_time_periods:
+      description: time series data for a given metric
+      properties:
+        end:
+          example: "2019-07-01T00:00:00.000Z"
+          type: string
+        start:
+          example: "2019-06-01T00:00:00.000Z"
+          type: string
+        values:
+          items:
+            $ref: '#/components/schemas/value_per_time_period'
+          type: array
+      required:
+      - end
+      - start
+      - values
+      type: object
+    whatsapp_message_request:
+      description: Request body to send proactive whatsapp messages
+      properties:
+        data:
+          $ref: '#/components/schemas/data'
+        from:
+          $ref: '#/components/schemas/user_handle'
+        to:
+          description: list of recipients
+          items:
+            $ref: '#/components/schemas/user_handle'
+          maxItems: 10
+          minItems: 1
+          type: array
+      required:
+      - data
+      - from
+      - to
+      type: object
 securitySchemes:
   basicAuth:
     type: http

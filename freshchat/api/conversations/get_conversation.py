@@ -1,51 +1,71 @@
 from http import HTTPStatus
-from typing import Any, Optional
+from typing import Any, Optional, Union
 from uuid import UUID
 
 import httpx
 
 from ... import errors
 from ...client import Client
+from ...models.conversation import Conversation
+from ...models.error import Error
 from ...types import Response
 
 
 def _get_kwargs(
-    id: UUID,
+    conversation_id: UUID,
 ) -> dict[str, Any]:
     _kwargs: dict[str, Any] = {
         "method": "get",
-        "url": f"/conversations/{id}",
+        "url": f"/conversations/{conversation_id}",
     }
 
     return _kwargs
 
 
-def _parse_response(*, client: Client, response: httpx.Response) -> Optional[Any]:
+def _parse_response(*, client: Client, response: httpx.Response) -> Optional[Union[Conversation, Error]]:
     if response.status_code == 200:
-        return None
+        response_200 = Conversation.from_dict(response.json())
+
+        return response_200
     if response.status_code == 400:
-        return None
+        response_400 = Error.from_dict(response.json())
+
+        return response_400
     if response.status_code == 401:
-        return None
+        response_401 = Error.from_dict(response.json())
+
+        return response_401
     if response.status_code == 403:
-        return None
+        response_403 = Error.from_dict(response.json())
+
+        return response_403
     if response.status_code == 404:
-        return None
+        response_404 = Error.from_dict(response.json())
+
+        return response_404
     if response.status_code == 409:
-        return None
+        response_409 = Error.from_dict(response.json())
+
+        return response_409
     if response.status_code == 429:
-        return None
+        response_429 = Error.from_dict(response.json())
+
+        return response_429
     if response.status_code == 500:
-        return None
+        response_500 = Error.from_dict(response.json())
+
+        return response_500
     if response.status_code == 503:
-        return None
+        response_503 = Error.from_dict(response.json())
+
+        return response_503
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:
         return None
 
 
-def _build_response(*, client: Client, response: httpx.Response) -> Response[Any]:
+def _build_response(*, client: Client, response: httpx.Response) -> Response[Union[Conversation, Error]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -55,27 +75,27 @@ def _build_response(*, client: Client, response: httpx.Response) -> Response[Any
 
 
 def sync_detailed(
-    id: UUID,
+    conversation_id: UUID,
     *,
     client: Client,
-) -> Response[Any]:
+) -> Response[Union[Conversation, Error]]:
     """Retrieves existing conversation
 
      Get conversation by Id
 
     Args:
-        id (UUID):
+        conversation_id (UUID):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Any]
+        Response[Union[Conversation, Error]]
     """
 
     kwargs = _get_kwargs(
-        id=id,
+        conversation_id=conversation_id,
     )
 
     response = client.get_httpx_client().request(
@@ -85,30 +105,84 @@ def sync_detailed(
     return _build_response(client=client, response=response)
 
 
-async def asyncio_detailed(
-    id: UUID,
+def sync(
+    conversation_id: UUID,
     *,
     client: Client,
-) -> Response[Any]:
+) -> Optional[Union[Conversation, Error]]:
     """Retrieves existing conversation
 
      Get conversation by Id
 
     Args:
-        id (UUID):
+        conversation_id (UUID):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Any]
+        Union[Conversation, Error]
+    """
+
+    return sync_detailed(
+        conversation_id=conversation_id,
+        client=client,
+    ).parsed
+
+
+async def asyncio_detailed(
+    conversation_id: UUID,
+    *,
+    client: Client,
+) -> Response[Union[Conversation, Error]]:
+    """Retrieves existing conversation
+
+     Get conversation by Id
+
+    Args:
+        conversation_id (UUID):
+
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
+
+    Returns:
+        Response[Union[Conversation, Error]]
     """
 
     kwargs = _get_kwargs(
-        id=id,
+        conversation_id=conversation_id,
     )
 
     response = await client.get_async_httpx_client().request(**kwargs)
 
     return _build_response(client=client, response=response)
+
+
+async def asyncio(
+    conversation_id: UUID,
+    *,
+    client: Client,
+) -> Optional[Union[Conversation, Error]]:
+    """Retrieves existing conversation
+
+     Get conversation by Id
+
+    Args:
+        conversation_id (UUID):
+
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
+
+    Returns:
+        Union[Conversation, Error]
+    """
+
+    return (
+        await asyncio_detailed(
+            conversation_id=conversation_id,
+            client=client,
+        )
+    ).parsed

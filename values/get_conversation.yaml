@@ -1,5 +1,5 @@
 paths:
-  /conversations/{id}:
+  /conversations/{conversation_id}:
     get:
       operationId: get_conversation
       summary: "Retrieves existing conversation"
@@ -9,163 +9,209 @@ paths:
       tags:
         - Conversations
       parameters:
-        - in: path
-          name: id
+        - name: conversation_id
+          in: path
           required: true
           schema:
-            format: uuid
             type: string
+            format: uuid
+          example: c2937604-0a08-43c2-a09c-e77f5f565a0e
       responses:
-        200:
-          description: "Success Request"
-          schema:
-            $ref: "#/definitions/conversation"
+        '200':
+          description: Success Request
           headers:
             X-RateLimit-Remaining:
-              type: "integer"
-              format: "int32"
-              description: "Number of operations left in the current window"
+              description: Number of operations left in the current window
+              schema:
+                type: integer
+                format: int32
             X-RateLimit-Reset:
-              type: "integer"
-              format: "int32"
-              description: "Time when rate limit window will be reset as a Unix timestamp."
+              description: Time when rate limit window will be reset as a Unix timestamp.
+              schema:
+                type: integer
+                format: int32
             X-RateLimit-Limit:
-              type: "integer"
-              format: "int32"
-              description: "Maximum number of operations allowed in the current window."
-        400:
-          description: "Bad Request"
-          schema:
-            $ref: "#/definitions/error"
+              description: Maximum number of operations allowed in the current window.
+              schema:
+                type: integer
+                format: int32
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/conversation'
+        '400':
+          description: Bad Request
           headers:
             X-RateLimit-Remaining:
-              type: "integer"
-              format: "int32"
-              description: "Number of operations left in the current window"
+              description: Number of operations left in the current window
+              schema:
+                type: integer
+                format: int32
             X-RateLimit-Reset:
-              type: "integer"
-              format: "int32"
-              description: "Time when rate limit window will be reset as a Unix timestamp."
+              description: Time when rate limit window will be reset as a Unix timestamp.
+              schema:
+                type: integer
+                format: int32
             X-RateLimit-Limit:
-              type: "integer"
-              format: "int32"
-              description: "Maximum number of operations allowed in the current window."
-        401:
-          description: "Unauthenticated Request"
-          schema:
-            $ref: "#/definitions/error"
+              description: Maximum number of operations allowed in the current window.
+              schema:
+                type: integer
+                format: int32
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '401':
+          description: Unauthenticated Request
           headers:
             X-RateLimit-Remaining:
-              type: "integer"
-              format: "int32"
-              description: "Number of operations left in the current window"
+              description: Number of operations left in the current window
+              schema:
+                type: integer
+                format: int32
             X-RateLimit-Reset:
-              type: "integer"
-              format: "int32"
-              description: "Time when rate limit window will be reset as a Unix timestamp."
+              description: Time when rate limit window will be reset as a Unix timestamp.
+              schema:
+                type: integer
+                format: int32
             X-RateLimit-Limit:
-              type: "integer"
-              format: "int32"
-              description: "Maximum number of operations allowed in the current window."
-        403:
-          description: "Forbidden"
-          schema:
-            $ref: "#/definitions/error"
+              description: Maximum number of operations allowed in the current window.
+              schema:
+                type: integer
+                format: int32
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '403':
+          description: Forbidden
           headers:
             X-RateLimit-Remaining:
-              type: "integer"
-              format: "int32"
-              description: "Number of operations left in the current window"
+              description: Number of operations left in the current window
+              schema:
+                type: integer
+                format: int32
             X-RateLimit-Reset:
-              type: "integer"
-              format: "int32"
-              description: "Time when rate limit window will be reset as a Unix timestamp."
+              description: Time when rate limit window will be reset as a Unix timestamp.
+              schema:
+                type: integer
+                format: int32
             X-RateLimit-Limit:
-              type: "integer"
-              format: "int32"
-              description: "Maximum number of operations allowed in the current window."
-        404:
-          description: "Not Found"
-          schema:
-            $ref: "#/definitions/error"
+              description: Maximum number of operations allowed in the current window.
+              schema:
+                type: integer
+                format: int32
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '404':
+          description: Not Found
           headers:
             X-RateLimit-Remaining:
-              type: "integer"
-              format: "int32"
-              description: "Number of operations left in the current window"
+              description: Number of operations left in the current window
+              schema:
+                type: integer
+                format: int32
             X-RateLimit-Reset:
-              type: "integer"
-              format: "int32"
-              description: "Time when rate limit window will be reset as a Unix timestamp."
+              description: Time when rate limit window will be reset as a Unix timestamp.
+              schema:
+                type: integer
+                format: int32
             X-RateLimit-Limit:
-              type: "integer"
-              format: "int32"
-              description: "Maximum number of operations allowed in the current window."
-        409:
-          description: "Conflict"
-          schema:
-            $ref: "#/definitions/error"
+              description: Maximum number of operations allowed in the current window.
+              schema:
+                type: integer
+                format: int32
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '409':
+          description: Conflict
           headers:
             X-RateLimit-Remaining:
-              type: "integer"
-              format: "int32"
-              description: "Number of operations left in the current window"
+              description: Number of operations left in the current window
+              schema:
+                type: integer
+                format: int32
             X-RateLimit-Reset:
-              type: "integer"
-              format: "int32"
-              description: "Time when rate limit window will be reset as a Unix timestamp."
+              description: Time when rate limit window will be reset as a Unix timestamp.
+              schema:
+                type: integer
+                format: int32
             X-RateLimit-Limit:
-              type: "integer"
-              format: "int32"
-              description: "Maximum number of operations allowed in the current window."
-        429:
-          description: "Too Many Requests"
-          schema:
-            $ref: "#/definitions/error"
+              description: Maximum number of operations allowed in the current window.
+              schema:
+                type: integer
+                format: int32
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '429':
+          description: Too Many Requests
           headers:
             X-RateLimit-Remaining:
-              type: "integer"
-              format: "int32"
-              description: "Number of operations left in the current window"
+              description: Number of operations left in the current window
+              schema:
+                type: integer
+                format: int32
             X-RateLimit-Reset:
-              type: "integer"
-              format: "int32"
-              description: "Time when rate limit window will be reset as a Unix timestamp."
+              description: Time when rate limit window will be reset as a Unix timestamp.
+              schema:
+                type: integer
+                format: int32
             X-RateLimit-Limit:
-              type: "integer"
-              format: "int32"
-              description: "Maximum number of operations allowed in the current window."
-        500:
-          description: "Internal Server Error"
-          schema:
-            $ref: "#/definitions/error"
+              description: Maximum number of operations allowed in the current window.
+              schema:
+                type: integer
+                format: int32
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '500':
+          description: Internal Server Error
           headers:
             X-RateLimit-Remaining:
-              type: "integer"
-              format: "int32"
-              description: "Number of operations left in the current window"
+              description: Number of operations left in the current window
+              schema:
+                type: integer
+                format: int32
             X-RateLimit-Reset:
-              type: "integer"
-              format: "int32"
-              description: "Time when rate limit window will be reset as a Unix timestamp."
+              description: Time when rate limit window will be reset as a Unix timestamp.
+              schema:
+                type: integer
+                format: int32
             X-RateLimit-Limit:
-              type: "integer"
-              format: "int32"
-              description: "Maximum number of operations allowed in the current window."
-        503:
-          description: "Service Unavailable"
-          schema:
-            $ref: "#/definitions/error"
+              description: Maximum number of operations allowed in the current window.
+              schema:
+                type: integer
+                format: int32
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '503':
+          description: Service Unavailable
           headers:
             X-RateLimit-Remaining:
-              type: "integer"
-              format: "int32"
-              description: "Number of operations left in the current window"
+              description: Number of operations left in the current window
+              schema:
+                type: integer
+                format: int32
             X-RateLimit-Reset:
-              type: "integer"
-              format: "int32"
-              description: "Time when rate limit window will be reset as a Unix timestamp."
+              description: Time when rate limit window will be reset as a Unix timestamp.
+              schema:
+                type: integer
+                format: int32
             X-RateLimit-Limit:
-              type: "integer"
-              format: "int32"
-              description: "Maximum number of operations allowed in the current window."
+              description: Maximum number of operations allowed in the current window.
+              schema:
+                type: integer
+                format: int32
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
