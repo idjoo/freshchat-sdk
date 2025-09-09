@@ -20,6 +20,8 @@ paths:
 components:
   schemas:
     {{- .Values.schemas | toYaml | nindent 4 }}
+definitions:
+  {{- .Values.definitions | toYaml | nindent 2 }}
 securitySchemes:
   basicAuth:
     type: http
