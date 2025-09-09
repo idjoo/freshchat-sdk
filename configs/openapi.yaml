@@ -634,10 +634,6 @@ components:
         conversation_id:
           example: c2937604-0a08-43c2-a09c-e77f5f565a0e
           type: string
-        messages:
-          items:
-            $ref: '#/components/schemas/message'
-          type: array
         status:
           enum:
           - new
@@ -652,10 +648,7 @@ components:
           type: array
       required:
       - app_id
-      - assigned_agent_id
-      - assigned_group_id
       - conversation_id
-      - messages
       - status
       type: object
     conversation_list_response:

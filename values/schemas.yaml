@@ -235,10 +235,7 @@ schemas:
   conversation:
     required:
       - app_id
-      - assigned_agent_id
-      - assigned_group_id
       - conversation_id
-      - messages
       - status
     type: object
     properties:
@@ -248,10 +245,6 @@ schemas:
       app_id:
         type: string
         example: 9d83ebc5-e036-4b48-b655-b0d79584b2c5
-      messages:
-        type: array
-        items:
-          $ref: '#/components/schemas/message'
       status:
         type: string
         example: new

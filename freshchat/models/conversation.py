@@ -8,7 +8,6 @@ from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
     from ..models.agent import Agent
-    from ..models.message import Message
     from ..models.user import User
 
 
@@ -21,23 +20,21 @@ class Conversation:
 
     Attributes:
         app_id (str):  Example: 9d83ebc5-e036-4b48-b655-b0d79584b2c5.
-        assigned_agent_id (str):  Example: c2937604-0a08-43c2-a09c-e77f5f565a0e.
-        assigned_group_id (str):  Example: c2937604-0a08-43c2-a09c-e77f5f565a0e.
         conversation_id (str):  Example: c2937604-0a08-43c2-a09c-e77f5f565a0e.
-        messages (list['Message']):
         status (ConversationStatus):  Example: new.
         agents (Union[Unset, list['Agent']]):
+        assigned_agent_id (Union[Unset, str]):  Example: c2937604-0a08-43c2-a09c-e77f5f565a0e.
+        assigned_group_id (Union[Unset, str]):  Example: c2937604-0a08-43c2-a09c-e77f5f565a0e.
         channel_id (Union[Unset, str]):  Example: 2681d294-3460-4f32-b5fb-828958995b5c.
         users (Union[Unset, list['User']]):
     """
 
     app_id: str
-    assigned_agent_id: str
-    assigned_group_id: str
     conversation_id: str
-    messages: list["Message"]
     status: ConversationStatus
     agents: Union[Unset, list["Agent"]] = UNSET
+    assigned_agent_id: Union[Unset, str] = UNSET
+    assigned_group_id: Union[Unset, str] = UNSET
     channel_id: Union[Unset, str] = UNSET
     users: Union[Unset, list["User"]] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
@@ -45,16 +42,7 @@ class Conversation:
     def to_dict(self) -> dict[str, Any]:
         app_id = self.app_id
 
-        assigned_agent_id = self.assigned_agent_id
-
-        assigned_group_id = self.assigned_group_id
-
         conversation_id = self.conversation_id
-
-        messages = []
-        for messages_item_data in self.messages:
-            messages_item = messages_item_data.to_dict()
-            messages.append(messages_item)
 
         status = self.status.value
 
@@ -64,6 +52,10 @@ class Conversation:
             for agents_item_data in self.agents:
                 agents_item = agents_item_data.to_dict()
                 agents.append(agents_item)
+
+        assigned_agent_id = self.assigned_agent_id
+
+        assigned_group_id = self.assigned_group_id
 
         channel_id = self.channel_id
 
@@ -79,15 +71,16 @@ class Conversation:
         field_dict.update(
             {
                 "app_id": app_id,
-                "assigned_agent_id": assigned_agent_id,
-                "assigned_group_id": assigned_group_id,
                 "conversation_id": conversation_id,
-                "messages": messages,
                 "status": status,
             }
         )
         if agents is not UNSET:
             field_dict["agents"] = agents
+        if assigned_agent_id is not UNSET:
+            field_dict["assigned_agent_id"] = assigned_agent_id
+        if assigned_group_id is not UNSET:
+            field_dict["assigned_group_id"] = assigned_group_id
         if channel_id is not UNSET:
             field_dict["channel_id"] = channel_id
         if users is not UNSET:
@@ -98,24 +91,12 @@ class Conversation:
     @classmethod
     def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         from ..models.agent import Agent
-        from ..models.message import Message
         from ..models.user import User
 
         d = src_dict.copy()
         app_id = d.pop("app_id")
 
-        assigned_agent_id = d.pop("assigned_agent_id")
-
-        assigned_group_id = d.pop("assigned_group_id")
-
         conversation_id = d.pop("conversation_id")
-
-        messages = []
-        _messages = d.pop("messages")
-        for messages_item_data in _messages:
-            messages_item = Message.from_dict(messages_item_data)
-
-            messages.append(messages_item)
 
         status = ConversationStatus(d.pop("status"))
 
@@ -125,6 +106,10 @@ class Conversation:
             agents_item = Agent.from_dict(agents_item_data)
 
             agents.append(agents_item)
+
+        assigned_agent_id = d.pop("assigned_agent_id", UNSET)
+
+        assigned_group_id = d.pop("assigned_group_id", UNSET)
 
         channel_id = d.pop("channel_id", UNSET)
 
@@ -137,12 +122,11 @@ class Conversation:
 
         conversation = cls(
             app_id=app_id,
-            assigned_agent_id=assigned_agent_id,
-            assigned_group_id=assigned_group_id,
             conversation_id=conversation_id,
-            messages=messages,
             status=status,
             agents=agents,
+            assigned_agent_id=assigned_agent_id,
+            assigned_group_id=assigned_group_id,
             channel_id=channel_id,
             users=users,
         )
